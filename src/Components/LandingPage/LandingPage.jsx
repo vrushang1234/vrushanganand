@@ -1,7 +1,8 @@
 import Headshot from "@/assets/VrushangHeadshot.svg";
 import "./LandingPage.css";
-export default function Landing() {
+export default function Landing({ setstart }) {
   function animate() {
+    setstart(true);
     document.getElementById("zoom-v").classList.add("zoom-animate");
     document.getElementsByClassName("landing-button")[0].style.display = "None";
     document.getElementsByClassName("landing-page")[0].classList.add("outro");

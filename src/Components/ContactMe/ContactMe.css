@@ -18,5 +18,11 @@
 }
 
 .social-icon {
-  height: 4rem;
+  height: 5rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  .contact-me {
+    flex-direction: column;
+  }
 }
