@@ -19,6 +19,7 @@
 
 .social-icon {
   height: 5rem;
+  z-index: 2;
 }
 
 @media only screen and (max-width: 1200px) {
