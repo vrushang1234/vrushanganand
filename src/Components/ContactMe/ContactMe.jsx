@@ -12,28 +12,28 @@ export default function ContactMe() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img className="social-icon" src={Gmail}></img>
+          <img className="social-icon" src={Gmail} />
         </a>
         <a
           href="https://github.com/vrushang1234"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img className="social-icon" src={Github}></img>
+          <img className="social-icon" src={Github} />
         </a>
         <a
           href="https://www.linkedin.com/in/vrushang-anand12/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img className="social-icon" src={LinkedIn}></img>
+          <img className="social-icon" src={LinkedIn} />
         </a>
         <a
           href="https://www.instagram.com/vrushang.anand/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img className="social-icon" src={Instagram}></img>
+          <img className="social-icon" src={Instagram} />
         </a>
       </div>
     </div>
