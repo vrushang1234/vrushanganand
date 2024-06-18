@@ -1,0 +1,108 @@
+.landing-page {
+  background-color: var(--landing-bg);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  position: fixed;
+}
+
+#zoom-v {
+  display: inline-block;
+}
+
+.zoom-animate {
+  animation-name: zoom-in;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.outro {
+  animation-name: outro;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+.landing-text {
+  /* The font size has to be really big for landing page, hence had to use vw to make it responsive */
+  font-size: 10vw;
+  font-weight: bold;
+  margin-left: 5%;
+  color: var(--secondary);
+  overflow: visible;
+}
+
+.landing-text > div > span {
+  color: var(--primary);
+  overflow: visible;
+}
+
+.headshot {
+  min-width: 550px;
+  height: 100%;
+}
+.landing-button {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.7rem;
+  padding: 10px 15px 10px 15px;
+  border: 0px solid;
+  border-radius: 10px;
+  background-color: var(--primary);
+  color: var(--secondary);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(0, 0);
+  }
+  25% {
+    transform: scale(30, 30);
+  }
+  70% {
+    transform: scale(200, 200);
+  }
+  100% {
+    transform: scale(200, 200);
+  }
+}
+
+@keyframes outro {
+  0% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .landing-page {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .landing-text {
+    width: 100%;
+    margin: 0 0 0 0;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10vh;
+    margin: 0 0 0 0;
+  }
+  .headshot {
+    height: 60%;
+  }
+}

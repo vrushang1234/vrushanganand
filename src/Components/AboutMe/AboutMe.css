@@ -1,0 +1,43 @@
+.about-me-container {
+  background-color: var(--primary);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5% 0 5% 0;
+}
+
+.intro-animation {
+  animation-name: intro;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+}
+.coding-cartoon {
+  width: 25vw;
+  min-width: 300px;
+  border-radius: 30px;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.about-me {
+  color: var(--secondary);
+  font-size: 1.5rem;
+  width: 50%;
+  text-align: left;
+  margin-left: 2%;
+}
+
+@media only screen and (max-width: 1200px) {
+  .coding-cartoon {
+    margin-top: 5%;
+    min-width: 300px;
+    width: 40%;
+  }
+  .about-me-container {
+    flex-direction: column;
+  }
+  .about-me {
+    font-size: 1.1rem;
+    width: 95%;
+  }
+}

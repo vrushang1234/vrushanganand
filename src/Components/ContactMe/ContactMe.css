@@ -1,0 +1,22 @@
+.contact-me {
+  height: 60vh;
+  background-color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-me > div {
+  background-color: var(--secondary);
+  height: 65%;
+  width: 65%;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  height: 4rem;
+}
