@@ -7,7 +7,7 @@ export default function AboutMe() {
     const createSnowflakes = () => {
       const container = document.querySelector(".about-me-container");
 
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 8; i++) {
         const snowflake = document.createElement("div");
         snowflake.className = "snowflake";
         const size = Math.random() * 10 + 5 + "px";
