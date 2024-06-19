@@ -4,6 +4,29 @@
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
 }
+
+body {
+  overflow: overlay;
+  scrollbar-width: 9px;
+  scrollbar-color: #888 transparent;
+}
+
 html {
   height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

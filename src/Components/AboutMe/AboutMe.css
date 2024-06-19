@@ -5,8 +5,12 @@
   justify-content: space-evenly;
   align-items: center;
   min-height: 100vh;
+  overflow: hidden;
 }
-
+.no-scroll {
+  height: 100vh;
+  overflow: hidden;
+}
 .intro-animation {
   animation-name: intro;
   animation-duration: 4s;
@@ -46,5 +50,21 @@
   .about-me {
     font-size: 1.1rem;
     width: 95%;
+  }
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
   }
 }

@@ -1,12 +1,23 @@
-.contact-me {
+.contact-me-container {
   height: 60vh;
   background-color: var(--primary);
+}
+.contact-me {
+  height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-.contact-me > div {
+.contact-me-container > h1 {
+  color: var(--secondary);
+  font-size: 3rem;
+  margin-top: 1%;
+  text-align: center;
+}
+
+.socials-container {
   background-color: var(--secondary);
   height: 65%;
   width: 65%;
@@ -23,8 +34,17 @@
   z-index: 2;
 }
 
+.cat-container {
+  overflow: hidden;
+  margin-top: 5%;
+  margin-left: 2%;
+}
+
 @media only screen and (max-width: 1200px) {
   .contact-me {
     flex-direction: column;
+  }
+  .socials-container {
+    margin-top: 2%;
   }
 }

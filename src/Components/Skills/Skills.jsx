@@ -1,10 +1,13 @@
+import React from "react";
 import "./Skills.css";
+
 export default function Skills() {
   return (
     <div className="skills">
       <h1>Skills</h1>
       <div className="skills-container">
         <div className="skills-box">
+          <div className="bear"></div>
           <h1>Languages</h1>
           <ul>
             <li>Python</li>
@@ -17,6 +20,7 @@ export default function Skills() {
           </ul>
         </div>
         <div className="skills-box">
+          <div className="bear"></div>
           <h1>Technologies</h1>
           <ul>
             <li>NextJS</li>

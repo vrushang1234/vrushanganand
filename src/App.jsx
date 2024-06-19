@@ -11,11 +11,11 @@ export default function App() {
     <div>
       <Landing setstart={setstart} />
       {start && (
-        <>
+        <div className="no-scroll">
           <AboutMe />
           <Skills />
           <ContactMe />
-        </>
+        </div>
       )}
     </div>
   );
