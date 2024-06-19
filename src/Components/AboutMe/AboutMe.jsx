@@ -23,11 +23,15 @@ export default function AboutMe() {
         container.appendChild(snowflake);
       }
     };
+
+    // Trigger the snowflakes creation and Astro movement after delay
     setTimeout(() => {
       document
         .getElementsByClassName("no-scroll")[0]
         .classList.remove("no-scroll");
       createSnowflakes();
+      moveAstroRandomly(); // Initial positioning
+      setInterval(moveAstroRandomly, 5000); // Move every 5 seconds
     }, 4500);
   }, []);
 
@@ -39,7 +43,11 @@ export default function AboutMe() {
         Engineering and minor in Computer Science. My hobbies are cooking food
         and coding. I also play video games occasionally.
       </div>
-      <img className="coding-cartoon" src={CodingCartoon} />
+      <img
+        className="coding-cartoon"
+        src={CodingCartoon}
+        alt="Coding Cartoon"
+      />
     </div>
   );
 }
