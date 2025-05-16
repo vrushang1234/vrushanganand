@@ -1,0 +1,21 @@
+.intro-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro {
+  font-size: 8rem;
+  text-align: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: fixed;
+}
+
+@media (max-width: 768px) {
+  .intro {
+    font-size: 3rem;
+  }
+}
