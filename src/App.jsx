@@ -6,6 +6,7 @@ export default function App() {
     <div>
       <Intro />
       <About />
+      <div style={{height:"100vh"}}></div>
     </div>
   );
 }
