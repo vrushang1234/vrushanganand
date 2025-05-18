@@ -1,4 +1,5 @@
 import About from "./Components/About/about";
+import Experience from "./Components/Experience/experience";
 import Intro from "./Components/Intro/intro";
 import "./index.css";
 export default function App() {
@@ -6,7 +7,7 @@ export default function App() {
     <div>
       <Intro />
       <About />
-      <div style={{height:"100vh"}}></div>
+      <Experience />
     </div>
   );
 }

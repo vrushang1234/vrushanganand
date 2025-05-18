@@ -1,4 +1,4 @@
-import "./about.css"
+import "./about.css";
 import { useState, useEffect } from "react";
 
 export default function About() {
@@ -13,19 +13,21 @@ export default function About() {
 
       const fadeInStart = 0.5 * viewportHeight;
       const fadeInEnd = viewportHeight;
-      const fadeOutStart = 1.8 * viewportHeight;
+      const fadeOutStart = 1.5 * viewportHeight;
       const fadeOutEnd = 2.2 * viewportHeight;
 
       let newOpacity = 0;
       if (scrolled < fadeInStart) {
         newOpacity = 0;
       } else if (scrolled >= fadeInStart && scrolled < fadeInEnd) {
-        const fadeProgress = (scrolled - fadeInStart) / (fadeInEnd - fadeInStart);
+        const fadeProgress =
+          (scrolled - fadeInStart) / (fadeInEnd - fadeInStart);
         newOpacity = Math.min(1, fadeProgress);
       } else if (scrolled >= fadeInEnd && scrolled < fadeOutStart) {
         newOpacity = 1;
       } else if (scrolled >= fadeOutStart && scrolled < fadeOutEnd) {
-        const fadeProgress = 1 - (scrolled - fadeOutStart) / (fadeOutEnd - fadeOutStart);
+        const fadeProgress =
+          1 - (scrolled - fadeOutStart) / (fadeOutEnd - fadeOutStart);
         newOpacity = Math.max(0, fadeProgress);
       } else {
         newOpacity = 0;
@@ -34,7 +36,8 @@ export default function About() {
       // Scale from 1 → 0.8 between fadeOutStart and fadeOutEnd
       let newScale = 1;
       if (scrolled >= fadeOutStart && scrolled < fadeOutEnd) {
-        const scaleProgress = (scrolled - fadeOutStart) / (fadeOutEnd - fadeOutStart);
+        const scaleProgress =
+          (scrolled - fadeOutStart) / (fadeOutEnd - fadeOutStart);
         newScale = 1 - 0.2 * scaleProgress; // scale down to 0.8
       } else if (scrolled >= fadeOutEnd) {
         newScale = 0.8;
