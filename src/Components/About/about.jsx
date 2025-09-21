@@ -2,7 +2,7 @@ import "./about.css";
 import { useState, useEffect } from "react";
 
 export default function About() {
-  const [gradientOffset, setGradientOffset] = useState(80);
+  const [gradientOffset, setGradientOffset] = useState(40);
   const [opacity, setOpacity] = useState(0);
   const [scale, setScale] = useState(1);
 
@@ -13,7 +13,7 @@ export default function About() {
 
       const fadeInStart = 0.5 * viewportHeight;
       const fadeInEnd = viewportHeight;
-      const fadeOutStart = 1.5 * viewportHeight;
+      const fadeOutStart = 1.6 * viewportHeight;
       const fadeOutEnd = 2.2 * viewportHeight;
 
       let newOpacity = 0;
@@ -33,18 +33,17 @@ export default function About() {
         newOpacity = 0;
       }
 
-      // Scale from 1 → 0.8 between fadeOutStart and fadeOutEnd
       let newScale = 1;
       if (scrolled >= fadeOutStart && scrolled < fadeOutEnd) {
         const scaleProgress =
           (scrolled - fadeOutStart) / (fadeOutEnd - fadeOutStart);
-        newScale = 1 - 0.2 * scaleProgress; // scale down to 0.8
+        newScale = 1 - 0.2 * scaleProgress;
       } else if (scrolled >= fadeOutEnd) {
         newScale = 0.8;
       }
 
       const localScroll = Math.max(0, scrolled - viewportHeight);
-      const newOffset = Math.min(70, 80 - localScroll / 10);
+      const newOffset = Math.min(70, 40 - localScroll / 60);
 
       setOpacity(newOpacity);
       setScale(newScale);
@@ -60,17 +59,35 @@ export default function About() {
       <h3
         className="about-text"
         style={{
-          backgroundImage: `radial-gradient(
+          backgroundImage: `
+            radial-gradient(
+              circle at 50% ${gradientOffset}vh,
+              rgba(255, 220, 140, 0.85) 0%,
+              rgba(255, 220, 140, 0.0) 30%
+            ),
+            radial-gradient(
             circle at 50% ${gradientOffset}vh,
-            rgb(255, 210, 123) 0vh,
+            rgb(255, 150, 123) 0vh,
             rgb(223, 58, 147) 100vh,
             rgb(92, 22, 99) 90vh,
             rgba(32, 31, 66, 0) 100vh
-          )`,
+          `,
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
           WebkitTextFillColor: "transparent",
-          opacity: opacity,
+
+          WebkitMaskImage: `radial-gradient(
+            farthest-corner at 50% ${gradientOffset}vh,
+            rgba(0,0,0,1) 96%,
+            rgba(0,0,0,0) 100%
+          )`,
+          maskImage: `radial-gradient(
+            farthest-corner at 50% ${gradientOffset}vh,
+            rgba(0,0,0,1) 96%,
+            rgba(0,0,0,0) 100%
+          )`,
+
+          opacity,
           transform: `scale(${scale})`,
           transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
         }}

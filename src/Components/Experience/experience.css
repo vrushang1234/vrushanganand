@@ -58,10 +58,27 @@
 
 .video-overlay > h1 {
   font-size: 4rem;
+  text-align: center;
 }
 
 .video-overlay > p {
   margin: 2% 1%;
   width: 70%;
   font-size: 1.15rem;
+}
+
+.video-overlay > h2 {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .experience-header {
+    font-size: 3rem;
+  }
+  .video-overlay > h1 {
+    font-size: 2rem;
+  }
+  .video-overlay > p {
+    font-size: 0rem;
+  }
 }
