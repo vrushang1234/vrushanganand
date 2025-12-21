@@ -26,20 +26,19 @@ export default function Experience() {
     };
 
     const close = () => {
-        setClosing(true); // phase 1: hide description
+        setClosing(true);
 
         setTimeout(() => {
-            setActive(null); // phase 2: zoom out
+            setActive(null);
             setOrigin(null);
             setClosing(false);
-        }, 100); // slightly longer than description exit (200ms)
+        }, 50);
     };
 
     return (
         <div className="experience-container">
             <h1 className="experience-header">Experience</h1>
 
-            {/* PREVIEW CARDS */}
             {experienceData.map((exp) => (
                 <div
                     key={exp.id}
@@ -92,7 +91,7 @@ export default function Experience() {
                             width: origin.width,
                             height: origin.height,
                             transition: {
-                                duration: 0.7,
+                                duration: 0.3,
                                 ease: [0.22, 1, 0.36, 1],
                             },
                         }}
