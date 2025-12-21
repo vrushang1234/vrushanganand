@@ -1,24 +1,24 @@
 .about-container {
-  height: 200vh;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  margin-left: 2%;
+    height: 200vh;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-left: 2%;
 }
 
 .about-text {
-  font-size: 2.6rem;
-  width: 70%;
-  position: fixed;
-  top: 40%;
+    font-size: 2.6rem;
+    width: 70%;
+    position: fixed;
+    top: 40%;
 }
 
 @media (max-width: 768px) {
-  .about-container {
-    justify-content: center;
-  }
-  .about-text {
-    font-size: 1.4rem;
-    top: 30%;
-  }
+    .about-container {
+        justify-content: center;
+    }
+    .about-text {
+        font-size: 1.4rem;
+        top: 30%;
+    }
 }
