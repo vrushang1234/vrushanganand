@@ -1,28 +1,51 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./experience.css";
 
 import VideoOverlay from "./video_overlay";
 import experienceData from "./info";
 
 export default function Experience() {
-    const [activeVideo, setActiveVideo] = useState(null);
+    const [active, setActive] = useState(null);
+    const [origin, setOrigin] = useState(null);
+    const [closing, setClosing] = useState(false);
+    const cardRefs = useRef({});
 
-    const activeExperience = experienceData.find(
-        (exp) => exp.id === activeVideo,
-    );
+    const activeExperience = experienceData.find((exp) => exp.id === active);
+
+    // lock scroll
+    useEffect(() => {
+        document.body.style.overflow = active ? "hidden" : "";
+        return () => (document.body.style.overflow = "");
+    }, [active]);
+
+    const open = (id) => {
+        const rect = cardRefs.current[id].getBoundingClientRect();
+        setOrigin(rect);
+        setActive(id);
+    };
+
+    const close = () => {
+        setClosing(true); // phase 1: hide description
+
+        setTimeout(() => {
+            setActive(null); // phase 2: zoom out
+            setOrigin(null);
+            setClosing(false);
+        }, 100); // slightly longer than description exit (200ms)
+    };
 
     return (
         <div className="experience-container">
             <h1 className="experience-header">Experience</h1>
 
+            {/* PREVIEW CARDS */}
             {experienceData.map((exp) => (
-                <motion.div
+                <div
                     key={exp.id}
-                    layout
-                    layoutId={exp.id}
+                    ref={(el) => (cardRefs.current[exp.id] = el)}
                     className="video-container"
-                    onClick={() => setActiveVideo(exp.id)}
+                    onClick={() => open(exp.id)}
                 >
                     <video
                         autoPlay
@@ -39,23 +62,41 @@ export default function Experience() {
                         date={exp.date}
                         description={exp.description}
                     />
-                </motion.div>
+                </div>
             ))}
 
-            <AnimatePresence>
-                {activeExperience && (
+            {/* CAMERA ZOOM LAYER */}
+            <AnimatePresence mode="wait">
+                {activeExperience && origin && (
                     <motion.div
-                        layoutId={activeExperience.id}
-                        className="video-container fullscreen"
-                        onClick={() => setActiveVideo(null)}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{
-                            duration: 0.45,
-                            ease: [0.4, 0, 0.2, 1],
+                        className="zoom-layer"
+                        initial={{
+                            x: origin.left,
+                            y: origin.top,
+                            width: origin.width,
+                            height: origin.height,
                         }}
-                        style={{ position: "fixed", inset: 0 }}
+                        animate={{
+                            x: 0,
+                            y: 0,
+                            width: "100vw",
+                            height: "100vh",
+                            transition: {
+                                duration: 1,
+                                ease: [0.22, 1, 0.36, 1],
+                            },
+                        }}
+                        exit={{
+                            x: origin.left,
+                            y: origin.top,
+                            width: origin.width,
+                            height: origin.height,
+                            transition: {
+                                duration: 0.7,
+                                ease: [0.22, 1, 0.36, 1],
+                            },
+                        }}
+                        onClick={close}
                     >
                         <video
                             autoPlay
@@ -69,11 +110,11 @@ export default function Experience() {
                                 type="video/mp4"
                             />
                         </video>
-
                         <VideoOverlay
                             title={activeExperience.title}
                             date={activeExperience.date}
                             description={activeExperience.description}
+                            isFullscreen={!closing}
                         />
                     </motion.div>
                 )}
