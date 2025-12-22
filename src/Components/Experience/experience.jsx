@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import "./experience.css";
 
 import VideoOverlay from "./video_overlay";
+import VideoWithFallback from "./video_fallback";
 import experienceData from "./info";
 
 export default function Experience() {
@@ -46,16 +47,11 @@ export default function Experience() {
                     className="video-container"
                     onClick={() => open(exp.id)}
                 >
-                    <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
+                    <VideoWithFallback
+                        src={exp.video}
+                        poster={exp.poster}
                         className="video-preview"
-                    >
-                        <source src={exp.video} type="video/mp4" />
-                    </video>
-
+                    />
                     <VideoOverlay
                         title={exp.title}
                         date={exp.date}
@@ -97,18 +93,11 @@ export default function Experience() {
                         }}
                         onClick={close}
                     >
-                        <video
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
+                        <VideoWithFallback
+                            src={activeExperience.video}
+                            poster={activeExperience.poster}
                             className="video-preview"
-                        >
-                            <source
-                                src={activeExperience.video}
-                                type="video/mp4"
-                            />
-                        </video>
+                        />
                         <VideoOverlay
                             title={activeExperience.title}
                             date={activeExperience.date}
