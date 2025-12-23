@@ -4,7 +4,8 @@ import HyperXitePoster from "../../assets/Pictures/HyperXite/hyperxite.webp";
 import SolarCarPoster from "../../assets/Pictures/SolarCar/solarcar.webp";
 import HyperXiteFSM from "../../assets/Pictures/HyperXite/FSM.png";
 import HyperXiteThreading from "../../assets/Pictures/HyperXite/Threading.png";
-import { m } from "framer-motion";
+import HyperXitePod from "../../assets/Pictures/HyperXite/hxpod.webp";
+import HyperXiteTeam from "../../assets/Pictures/HyperXite/HXTeam.JPG";
 
 const experienceData = [
     {
@@ -28,13 +29,23 @@ const experienceData = [
         images: [
             {
                 id: 1,
-                url: HyperXiteFSM,
-                title: "FSM",
+                url: HyperXitePod,
+                title: "The HyperXite Pod",
             },
             {
                 id: 2,
+                url: HyperXiteFSM,
+                title: "FSM Schematic",
+            },
+            {
+                id: 3,
                 url: HyperXiteThreading,
-                title: "Threading",
+                title: "Multithreading Schematic",
+            },
+            {
+                id: 4,
+                url: HyperXiteTeam,
+                title: "Team Photo",
             },
         ],
     },

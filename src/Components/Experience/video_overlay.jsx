@@ -14,7 +14,7 @@ import { useEffect, useRef, useState } from "react";
  * ]
  */
 
-function VideoOverlay({ arg, isFullscreen }) {
+function VideoOverlay({ arg, isFullscreen, onOpen, onClose }) {
     const [index, setIndex] = useState(0);
     const containerRef = useRef(null);
     const x = useMotionValue(0);
@@ -32,11 +32,35 @@ function VideoOverlay({ arg, isFullscreen }) {
     return (
         <motion.div
             className={`video-overlay ${isFullscreen ? "fullscreen" : ""}`}
+            onClick={(e) => e.stopPropagation()}
         >
             {/* HEADER */}
-            <motion.h1>{arg.title}</motion.h1>
-            <motion.h2>{arg.date}</motion.h2>
-
+            <div className="overlay-header">
+                <motion.h1>{arg.title}</motion.h1>
+                <motion.h2>{arg.date}</motion.h2>
+                {!isFullscreen && (
+                    <button
+                        className="overlay-btn-open"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onOpen?.();
+                        }}
+                    >
+                        View
+                    </button>
+                )}
+                {isFullscreen && (
+                    <button
+                        className="overlay-btn-close"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onClose?.();
+                        }}
+                    >
+                        &lt;&lt;
+                    </button>
+                )}
+            </div>
             <AnimatePresence>
                 {isFullscreen && (
                     <motion.div
@@ -47,7 +71,6 @@ function VideoOverlay({ arg, isFullscreen }) {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="overlay-content"
                     >
-                        {/* DESCRIPTION */}
                         <p className="proj-desc">{arg.description}</p>
 
                         <h2 className="pos-header">{arg.posHeader}</h2>
@@ -57,7 +80,6 @@ function VideoOverlay({ arg, isFullscreen }) {
                             </p>
                         ))}
 
-                        {/* CAROUSEL */}
                         {arg.images && (
                             <div className="carousel-wrapper">
                                 <div
@@ -73,6 +95,9 @@ function VideoOverlay({ arg, isFullscreen }) {
                                                 key={item.id}
                                                 className="carousel-slide"
                                             >
+                                                <h2 className="carousel-img-title">
+                                                    {item.title}
+                                                </h2>
                                                 <img
                                                     src={item.url}
                                                     alt={item.title}
@@ -82,7 +107,6 @@ function VideoOverlay({ arg, isFullscreen }) {
                                         ))}
                                     </motion.div>
 
-                                    {/* LEFT */}
                                     <button
                                         className="carousel-btn left"
                                         disabled={index === 0}
@@ -90,10 +114,9 @@ function VideoOverlay({ arg, isFullscreen }) {
                                             setIndex((i) => Math.max(0, i - 1))
                                         }
                                     >
-                                        ‹
+                                        &lt;
                                     </button>
 
-                                    {/* RIGHT */}
                                     <button
                                         className="carousel-btn right"
                                         disabled={
@@ -108,18 +131,15 @@ function VideoOverlay({ arg, isFullscreen }) {
                                             )
                                         }
                                     >
-                                        ›
+                                        &gt;
                                     </button>
 
-                                    {/* DOTS */}
                                     <div className="carousel-dots">
                                         {arg.images.map((_, i) => (
                                             <button
                                                 key={i}
                                                 onClick={() => setIndex(i)}
-                                                className={`dot ${
-                                                    i === index ? "active" : ""
-                                                }`}
+                                                className={`dot ${i === index ? "active" : ""}`}
                                             />
                                         ))}
                                     </div>

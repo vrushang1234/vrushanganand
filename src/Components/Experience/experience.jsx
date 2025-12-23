@@ -10,18 +10,23 @@ export default function Experience() {
     const [active, setActive] = useState(null);
     const [origin, setOrigin] = useState(null);
     const [closing, setClosing] = useState(false);
+
     const cardRefs = useRef({});
 
-    const activeExperience = experienceData.find((exp) => exp.id === active);
+    const activeExperience = experienceData.find((e) => e.id === active);
 
-    // lock scroll
+    /* Lock scroll when fullscreen */
     useEffect(() => {
         document.body.style.overflow = active ? "hidden" : "";
-        return () => (document.body.style.overflow = "");
+        return () => {
+            document.body.style.overflow = "";
+        };
     }, [active]);
 
     const open = (id) => {
-        const rect = cardRefs.current[id].getBoundingClientRect();
+        const rect = cardRefs.current[id]?.getBoundingClientRect();
+        if (!rect) return;
+
         setOrigin(rect);
         setActive(id);
     };
@@ -40,19 +45,24 @@ export default function Experience() {
         <div className="experience-container">
             <h1 className="experience-header">Experience</h1>
 
+            {/* PREVIEW CARDS */}
             {experienceData.map((exp) => (
                 <div
                     key={exp.id}
                     ref={(el) => (cardRefs.current[exp.id] = el)}
                     className="video-container"
-                    onClick={() => open(exp.id)}
                 >
                     <VideoWithFallback
                         src={exp.video}
                         poster={exp.poster}
                         className="video-preview"
                     />
-                    <VideoOverlay arg={exp} />
+
+                    <VideoOverlay
+                        arg={exp}
+                        isFullscreen={false}
+                        onOpen={() => open(exp.id)}
+                    />
                 </div>
             ))}
 
@@ -87,16 +97,17 @@ export default function Experience() {
                                 ease: [0.22, 1, 0.36, 1],
                             },
                         }}
-                        onClick={close}
                     >
                         <VideoWithFallback
                             src={activeExperience.video}
                             poster={activeExperience.poster}
                             className="video-preview"
                         />
+
                         <VideoOverlay
                             arg={activeExperience}
                             isFullscreen={!closing}
+                            onClose={close}
                         />
                     </motion.div>
                 )}
