@@ -18,7 +18,9 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-} /* CARD */
+}
+
+/* CARD */
 
 .video-container {
     position: relative;
@@ -50,6 +52,13 @@
     text-align: center;
 }
 
+.video-overlay.fullscreen {
+    pointer-events: auto;
+    overflow-y: auto;
+    justify-content: flex-start;
+    padding: 8vh 0 12vh 0;
+}
+
 .video-overlay h1 {
     font-size: 4rem;
 }
@@ -68,6 +77,16 @@
     z-index: 999;
     overflow: hidden;
     background: black;
+}
+
+.pos-header {
+    text-align: left;
+    margin-top: 7%;
+    font-size: 3rem;
+}
+
+.pos-desc {
+    text-align: left;
 }
 
 /* CINEMATIC VIGNETTE */
@@ -90,7 +109,11 @@
         font-size: 1.2rem;
     }
 
-    .video-overlay > p {
+    .pos-header {
+        font-size: 1.2rem;
+    }
+
+    .video-overlay p {
         font-size: 1rem;
     }
 }

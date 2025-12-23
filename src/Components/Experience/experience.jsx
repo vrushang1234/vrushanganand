@@ -33,7 +33,7 @@ export default function Experience() {
             setActive(null);
             setOrigin(null);
             setClosing(false);
-        }, 50);
+        }, 200);
     };
 
     return (
@@ -52,11 +52,7 @@ export default function Experience() {
                         poster={exp.poster}
                         className="video-preview"
                     />
-                    <VideoOverlay
-                        title={exp.title}
-                        date={exp.date}
-                        description={exp.description}
-                    />
+                    <VideoOverlay arg={exp} />
                 </div>
             ))}
 
@@ -87,7 +83,7 @@ export default function Experience() {
                             width: origin.width,
                             height: origin.height,
                             transition: {
-                                duration: 0.3,
+                                duration: 0.5,
                                 ease: [0.22, 1, 0.36, 1],
                             },
                         }}
@@ -99,9 +95,7 @@ export default function Experience() {
                             className="video-preview"
                         />
                         <VideoOverlay
-                            title={activeExperience.title}
-                            date={activeExperience.date}
-                            description={activeExperience.description}
+                            arg={activeExperience}
                             isFullscreen={!closing}
                         />
                     </motion.div>
