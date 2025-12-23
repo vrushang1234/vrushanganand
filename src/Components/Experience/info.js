@@ -4,6 +4,7 @@ import HyperXitePoster from "../../assets/Pictures/HyperXite/hyperxite.webp";
 import SolarCarPoster from "../../assets/Pictures/SolarCar/solarcar.webp";
 import HyperXiteFSM from "../../assets/Pictures/HyperXite/FSM.png";
 import HyperXiteThreading from "../../assets/Pictures/HyperXite/Threading.png";
+import { m } from "framer-motion";
 
 const experienceData = [
     {
@@ -24,7 +25,18 @@ const experienceData = [
 
             "What I enjoyed most was working at the boundary between software and physical systems - where timing matters, assumptions break, and every bug has a real-world consequence.",
         ],
-        images: [HyperXiteFSM, HyperXiteThreading],
+        images: [
+            {
+                id: 1,
+                url: HyperXiteFSM,
+                title: "FSM",
+            },
+            {
+                id: 2,
+                url: HyperXiteThreading,
+                title: "Threading",
+            },
+        ],
     },
     {
         id: "solarcar",

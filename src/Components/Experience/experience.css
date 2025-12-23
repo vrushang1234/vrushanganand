@@ -89,6 +89,90 @@
     text-align: left;
 }
 
+/* CAROUSEL */
+
+.carousel-wrapper {
+    margin-top: 2rem;
+}
+
+.carousel-viewport {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 360px;
+    border-radius: 12px;
+}
+
+.carousel-track {
+    display: flex;
+    height: 100%;
+}
+
+.carousel-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    pointer-events: none;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 10;
+}
+
+.carousel-btn.left {
+    left: 16px;
+}
+
+.carousel-btn.right {
+    right: 16px;
+}
+
+.carousel-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dot.active {
+    width: 24px;
+    background: white;
+}
+
 /* CINEMATIC VIGNETTE */
 
 .zoom-layer::after {
