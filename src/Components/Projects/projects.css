@@ -1,0 +1,267 @@
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.projects-header {
+    margin-top: 10%;
+    text-align: center;
+    font-size: 5rem;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 5vh;
+}
+
+/* CAROUSEL */
+
+.projects-carousel {
+    width: 100%;
+    height: 50vh;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.projects-carousel-viewport {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 90%;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+}
+
+.projects-carousel-track {
+    display: flex;
+    height: 65%;
+}
+.projects-carousel-slide {
+    position: relative;
+    overflow: hidden;
+
+    flex-shrink: 0;
+    width: 30%;
+    margin: 5%;
+    height: 70%;
+
+    color: white;
+    padding: 5%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: none;
+    gap: 1.2rem;
+}
+
+.projects-carousel-slide::before {
+    content: "";
+    position: absolute;
+    inset: -30px;
+
+    background-image: var(--bg);
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(28px);
+    opacity: 0.25;
+
+    z-index: 0;
+}
+.projects-carousel-slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image: var(--bg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    filter: brightness(0.4) blur(5px);
+    z-index: 0;
+}
+
+.projects-carousel-slide > * {
+    position: relative;
+    z-index: 1;
+}
+
+.project-title {
+    font-size: 2.7rem;
+    text-align: center;
+}
+
+.project-desc {
+    font-size: 1.3rem;
+    max-width: 80%;
+}
+
+/* CONTROLS */
+
+.projects-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.projects-carousel-btn.left {
+    left: 16px;
+}
+
+.projects-carousel-btn.right {
+    right: 16px;
+}
+
+.projects-carousel-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.projects-carousel-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    bottom: 0%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dot.active {
+    width: 24px;
+    background: white;
+}
+
+.project-button {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.2rem;
+
+    background-color: white;
+    color: black;
+
+    border: 0px solid;
+    border-radius: 10px;
+    cursor: pointer;
+
+    font-size: 1.3rem;
+
+    transition:
+        background 0.25s ease,
+        border 0.25s ease;
+}
+
+/* ICON STACK */
+.icon-wrapper {
+    position: relative;
+    width: 25px;
+    height: 25px;
+}
+
+.icon {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.2s ease;
+}
+
+.icon-default {
+    opacity: 1;
+}
+
+.icon-hover {
+    opacity: 0;
+}
+
+.project-button:hover .icon-default {
+    opacity: 0;
+}
+
+.project-button:hover .icon-hover {
+    opacity: 1;
+}
+
+.project-button:hover {
+    background: black;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .projects-header {
+        font-size: 3rem;
+    }
+
+    .project-title {
+        font-size: 1.5rem;
+    }
+
+    .project-desc {
+        font-size: 1rem;
+    }
+
+    .projects-carousel-slide {
+        width: 100%;
+        margin: 0;
+        height: 80%;
+    }
+
+    .projects-carousel-track {
+        height: 85%;
+    }
+    .project-button {
+        font-size: 1rem;
+    }
+
+    .icon-wrapper {
+        height: 20px;
+        width: 20px;
+    }
+
+    .projects-carousel-btn {
+        top: 90%;
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+    }
+
+    .projects-carousel-dots {
+        bottom: 8%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .projects-carousel-slide {
+        width: 100%;
+        margin: 0;
+        height: 80%;
+    }
+    .projects-carousel-track {
+        height: 85%;
+    }
+}

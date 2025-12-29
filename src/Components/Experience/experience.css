@@ -1,13 +1,6 @@
 .experience-header {
     text-align: center;
     font-size: 5rem;
-    background: radial-gradient(
-        circle at 50%,
-        rgb(255, 210, 123) 0vh,
-        rgb(223, 58, 147) 50vh,
-        rgb(92, 22, 99) 90vh,
-        rgba(32, 31, 66, 0) 50vh
-    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

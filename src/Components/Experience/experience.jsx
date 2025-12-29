@@ -5,6 +5,8 @@ import "./experience.css";
 import VideoOverlay from "./video_overlay";
 import VideoWithFallback from "./video_fallback";
 import experienceData from "./info";
+import { useScrollGradient } from "../../useScrollGradient";
+import gradientStyle from "../../gradientStyle";
 
 export default function Experience() {
     const [active, setActive] = useState(null);
@@ -15,7 +17,13 @@ export default function Experience() {
 
     const activeExperience = experienceData.find((e) => e.id === active);
 
-    /* Lock scroll when fullscreen */
+    const { opacity, scale, gradientOffset } = useScrollGradient({
+        fadeInStart: 1.8,
+        fadeInEnd: 2.4,
+        baseOffset: 70,
+        offsetSpeed: 60,
+    });
+
     useEffect(() => {
         document.body.style.overflow = active ? "hidden" : "";
         return () => {
@@ -43,8 +51,12 @@ export default function Experience() {
 
     return (
         <div className="experience-container">
-            <h1 className="experience-header">Experience</h1>
-
+            <h1
+                className="experience-header"
+                style={gradientStyle(gradientOffset, opacity, scale)}
+            >
+                Experience
+            </h1>
             {/* PREVIEW CARDS */}
             {experienceData.map((exp) => (
                 <div
@@ -65,7 +77,6 @@ export default function Experience() {
                     />
                 </div>
             ))}
-
             {/* CAMERA ZOOM LAYER */}
             <AnimatePresence mode="wait">
                 {activeExperience && origin && (
