@@ -1,39 +1,51 @@
 import { useState, useEffect } from "react";
 
-export function useScrollGradient({
-    fadeInStart,
-    fadeInEnd,
-    fadeOutStart,
-    fadeOutEnd,
-    baseOffset,
-    offsetSpeed,
-}) {
+export function useScrollGradient(
+    ref,
+    {
+        mode = "enter",
+        fadeInStart = 0,
+        fadeInEnd = 0,
+        fadeOutStart,
+        fadeOutEnd,
+        baseOffset = 70,
+        offsetSpeed = 60,
+    },
+) {
     const [opacity, setOpacity] = useState(0);
     const [scale, setScale] = useState(1);
-    const [gradientOffset, setGradientOffset] = useState(100);
+    const [gradientOffset, setGradientOffset] = useState(baseOffset);
 
+    const hasFadeIn = fadeInEnd > fadeInStart;
     const hasFadeOut =
         typeof fadeOutStart === "number" && typeof fadeOutEnd === "number";
 
     useEffect(() => {
+        if (!ref?.current) return;
+
         const handleScroll = () => {
-            const scrolled = window.scrollY;
             const vh = window.innerHeight;
+            const rect = ref.current.getBoundingClientRect();
 
-            let newOpacity = 0;
+            const localScroll =
+                mode === "exit"
+                    ? Math.max(0, -rect.top) // hero / intro
+                    : Math.max(0, vh - rect.top); // normal sections
 
-            if (scrolled < fadeInStart * vh) {
+            let newOpacity;
+
+            if (hasFadeIn && localScroll < fadeInStart * vh) {
                 newOpacity = 0;
-            } else if (scrolled < fadeInEnd * vh) {
+            } else if (hasFadeIn && localScroll < fadeInEnd * vh) {
                 newOpacity =
-                    (scrolled - fadeInStart * vh) /
+                    (localScroll - fadeInStart * vh) /
                     ((fadeInEnd - fadeInStart) * vh);
-            } else if (!hasFadeOut || scrolled < fadeOutStart * vh) {
+            } else if (!hasFadeOut || localScroll < fadeOutStart * vh) {
                 newOpacity = 1;
-            } else if (scrolled < fadeOutEnd * vh) {
+            } else if (localScroll < fadeOutEnd * vh) {
                 newOpacity =
                     1 -
-                    (scrolled - fadeOutStart * vh) /
+                    (localScroll - fadeOutStart * vh) /
                         ((fadeOutEnd - fadeOutStart) * vh);
             } else {
                 newOpacity = hasFadeOut ? 0 : 1;
@@ -43,22 +55,21 @@ export function useScrollGradient({
 
             if (hasFadeOut) {
                 if (
-                    scrolled >= fadeOutStart * vh &&
-                    scrolled < fadeOutEnd * vh
+                    localScroll >= fadeOutStart * vh &&
+                    localScroll < fadeOutEnd * vh
                 ) {
                     const p =
-                        (scrolled - fadeOutStart * vh) /
+                        (localScroll - fadeOutStart * vh) /
                         ((fadeOutEnd - fadeOutStart) * vh);
                     newScale = 1 - 0.2 * p;
-                } else if (scrolled >= fadeOutEnd * vh) {
+                } else if (localScroll >= fadeOutEnd * vh) {
                     newScale = 0.8;
                 }
             }
 
-            const localScroll = Math.max(0, scrolled - vh);
-            const newOffset = Math.min(
-                70,
-                baseOffset - localScroll / offsetSpeed,
+            const newOffset = Math.max(
+                0,
+                Math.min(70, baseOffset - localScroll / offsetSpeed),
             );
 
             setOpacity(Math.max(0, Math.min(1, newOpacity)));
@@ -66,11 +77,22 @@ export function useScrollGradient({
             setGradientOffset(newOffset);
         };
 
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         handleScroll();
 
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [
+        ref,
+        mode,
+        fadeInStart,
+        fadeInEnd,
+        fadeOutStart,
+        fadeOutEnd,
+        baseOffset,
+        offsetSpeed,
+        hasFadeIn,
+        hasFadeOut,
+    ]);
 
     return { opacity, scale, gradientOffset };
 }

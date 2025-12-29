@@ -65,11 +65,13 @@ const projects = [
     },
 ];
 export default function Projects() {
-    const { opacity, scale, gradientOffset } = useScrollGradient({
-        fadeInStart: 3,
-        fadeInEnd: 4,
-        baseOffset: 40,
-        offsetSpeed: 60,
+    const projectsRef = useRef(null);
+    const { opacity, scale, gradientOffset } = useScrollGradient(projectsRef, {
+        mode: "enter",
+        fadeInStart: 0,
+        fadeInEnd: 0.3,
+        baseOffset: 30,
+        offsetSpeed: 40,
     });
 
     const [index, setIndex] = useState(0);
@@ -115,7 +117,7 @@ export default function Projects() {
     const maxIndex = Math.max(0, projects.length - slidesPerView);
 
     return (
-        <div className="projects-container">
+        <div className="projects-container" ref={projectsRef}>
             <h1
                 className="projects-header"
                 style={gradientStyle(gradientOffset, opacity, scale)}

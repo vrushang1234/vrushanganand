@@ -116,6 +116,7 @@
     background: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     z-index: 10;
+    color: black;
 }
 
 .projects-carousel-btn.left {

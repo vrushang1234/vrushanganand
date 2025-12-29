@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import "./experience.css";
 
 import VideoOverlay from "./video_overlay";
@@ -9,6 +9,8 @@ import { useScrollGradient } from "../../useScrollGradient";
 import gradientStyle from "../../gradientStyle";
 
 export default function Experience() {
+    const experienceRef = useRef(null);
+
     const [active, setActive] = useState(null);
     const [origin, setOrigin] = useState(null);
     const [closing, setClosing] = useState(false);
@@ -17,12 +19,18 @@ export default function Experience() {
 
     const activeExperience = experienceData.find((e) => e.id === active);
 
-    const { opacity, scale, gradientOffset } = useScrollGradient({
-        fadeInStart: 1.8,
-        fadeInEnd: 2.4,
-        baseOffset: 70,
-        offsetSpeed: 60,
-    });
+    const { opacity, scale, gradientOffset } = useScrollGradient(
+        experienceRef,
+        {
+            mode: "enter",
+            fadeInStart: 0.0,
+            fadeInEnd: 0.6,
+            fadeOutStart: 1.2,
+            fadeOutEnd: 1.6,
+            baseOffset: 30,
+            offsetSpeed: 35,
+        },
+    );
 
     useEffect(() => {
         document.body.style.overflow = active ? "hidden" : "";
@@ -50,13 +58,14 @@ export default function Experience() {
     };
 
     return (
-        <div className="experience-container">
+        <div className="experience-container" ref={experienceRef}>
             <h1
                 className="experience-header"
                 style={gradientStyle(gradientOffset, opacity, scale)}
             >
                 Experience
             </h1>
+
             {/* PREVIEW CARDS */}
             {experienceData.map((exp) => (
                 <div
@@ -77,6 +86,7 @@ export default function Experience() {
                     />
                 </div>
             ))}
+
             {/* CAMERA ZOOM LAYER */}
             <AnimatePresence mode="wait">
                 {activeExperience && origin && (

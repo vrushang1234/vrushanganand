@@ -1,19 +1,24 @@
 import "./about.css";
+import { useRef } from "react";
+
 import { useScrollGradient } from "../../useScrollGradient";
 import gradientStyle from "../../gradientStyle";
 
 export default function About() {
-    const { opacity, scale, gradientOffset } = useScrollGradient({
-        fadeInStart: 0.6,
-        fadeInEnd: 1.0,
-        fadeOutStart: 1.6,
-        fadeOutEnd: 2.2,
-        baseOffset: 20,
-        offsetSpeed: 60,
+    const aboutRef = useRef(null);
+
+    const { opacity, scale, gradientOffset } = useScrollGradient(aboutRef, {
+        mode: "enter",
+        fadeInStart: 0.7,
+        fadeInEnd: 1.2,
+        fadeOutStart: 1.7,
+        fadeOutEnd: 2.4,
+        baseOffset: 60,
+        offsetSpeed: 45,
     });
 
     return (
-        <div className="about-container">
+        <div className="about-container" ref={aboutRef}>
             <h3
                 className="about-text"
                 style={gradientStyle(gradientOffset, opacity, scale)}
