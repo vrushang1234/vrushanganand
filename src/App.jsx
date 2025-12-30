@@ -1,4 +1,5 @@
 import About from "./Components/About/about";
+import Contact from "./Components/Contact/contact";
 import Experience from "./Components/Experience/experience";
 import Intro from "./Components/Intro/intro";
 import Projects from "./Components/Projects/projects";
@@ -12,6 +13,7 @@ export default function App() {
             <Experience />
             <Projects />
             <Skills />
+            <Contact />
         </div>
     );
 }

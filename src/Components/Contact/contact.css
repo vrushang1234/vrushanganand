@@ -1,0 +1,95 @@
+.contact-section-container {
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.contact-container {
+    position: relative;
+    height: 80%;
+    width: 70%;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255, 170, 180, 0.35) 0%,
+        rgba(255, 140, 160, 0.28) 30%,
+        rgba(255, 120, 150, 0.18) 50%
+    );
+
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+.contact-surface {
+    position: absolute;
+    inset: 10%;
+    border-radius: 28px;
+    color: white;
+
+    background: linear-gradient(
+        180deg,
+        rgb(30, 14, 30) 0%,
+        rgb(18, 8, 20) 55%,
+        rgb(8, 4, 10) 100%
+    );
+
+    backdrop-filter: blur(10px);
+}
+
+.contact-text {
+    position: absolute;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-text > h1 {
+    font-size: 3rem;
+}
+.contact-text > p {
+    font-size: 1.5rem;
+    margin-top: 2%;
+}
+
+.contact-button {
+    margin-top: 5%;
+    font-size: 1.4rem;
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(212, 83, 102, 0.85);
+    border: solid 0px;
+    color: black;
+    font-weight: bold;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.contact-button:hover {
+    transform: scale(1.05);
+}
+
+.mail-icon {
+    height: 1.6rem;
+    margin-right: 0.4rem;
+}
+
+@media (max-width: 768px) {
+    .contact-text > h1 {
+        font-size: 2rem;
+    }
+
+    .contact-text > p {
+        font-size: 1rem;
+    }
+
+    .contact-button {
+        font-size: 1.1rem;
+    }
+}

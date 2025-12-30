@@ -5,6 +5,21 @@
     font-family: "Montserrat", sans-serif;
 }
 
+button,
+a,
+input,
+select,
+textarea,
+[role="button"] {
+    cursor: inherit;
+}
+
+body {
+    cursor:
+        url("./assets/Pictures/cursor.png") 25 25,
+        auto;
+}
+
 #root {
     background: #000000;
     background: linear-gradient(

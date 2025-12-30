@@ -21,7 +21,6 @@
     height: 50vh;
     margin: 5% 0;
     overflow: hidden;
-    cursor: pointer;
 }
 
 .video-preview {
@@ -181,7 +180,6 @@
     border-radius: 50%;
     border: none;
     background: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
     z-index: 10;
 }
 
@@ -195,7 +193,6 @@
 
 .carousel-btn:disabled {
     opacity: 0.4;
-    cursor: not-allowed;
 }
 
 .carousel-dots {
@@ -213,7 +210,6 @@
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.5);
     border: none;
-    cursor: pointer;
     transition: all 0.2s ease;
 }
 

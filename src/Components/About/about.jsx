@@ -13,7 +13,7 @@ export default function About() {
         fadeInEnd: 1.2,
         fadeOutStart: 1.7,
         fadeOutEnd: 2.4,
-        baseOffset: 60,
+        baseOffset: 50,
         offsetSpeed: 45,
     });
 
