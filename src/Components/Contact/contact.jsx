@@ -11,10 +11,12 @@ export default function Contact() {
             <div className="contact-text">
                 <h1>Let's Collaborate!</h1>
                 <p>I am always down create cool stuff together!</p>
-                <button className="contact-button">
-                    <img src={mail} className="mail-icon" />
-                    Get in touch
-                </button>
+                <a href="mailto:vrushanganand2004@gmail.com">
+                    <button className="contact-button">
+                        <img src={mail} className="mail-icon" />
+                        Get in touch
+                    </button>
+                </a>
             </div>
         </div>
     );

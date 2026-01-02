@@ -12,8 +12,20 @@ export default function Footer() {
                 &#169; Vrushang Anand. All Rights Reserved
             </div>
             <div className="footer-icons">
-                <img src={Github} />
-                <img src={LinkedIn} />
+                <a
+                    href="https://www.github.com/vrushang1234"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img src={Github} />
+                </a>
+                <a
+                    href="https://www.linkedin.com/in/vrushang-anand12/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img src={LinkedIn} />
+                </a>
                 <a href={ResumePDF} target="_blank" rel="noopener noreferrer">
                     <img src={Resume} />
                 </a>

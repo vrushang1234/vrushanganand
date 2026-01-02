@@ -7,6 +7,11 @@
     color: white;
 }
 
+.contact-text a {
+    text-decoration: none;
+    color: black;
+}
+
 .contact-container {
     position: relative;
     height: 80%;
