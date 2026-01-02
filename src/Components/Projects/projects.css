@@ -98,8 +98,9 @@
 }
 
 .project-desc {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     max-width: 80%;
+    text-align: center;
 }
 
 /* CONTROLS */

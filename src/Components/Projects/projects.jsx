@@ -13,55 +13,77 @@ import ESC from "../../assets/Projects/ESC.png";
 import ICS from "../../assets/Projects/ICS259.png";
 import GHW from "../../assets/Pictures/github-white.png";
 import GHB from "../../assets/Pictures/github-black.png";
+import WWB from "../../assets/Pictures/web-black.png";
+import WWW from "../../assets/Pictures/web-white.png";
 
 const projects = [
     {
         id: 1,
-        title: "RL Kernel Scheduler",
-        description: "PPO Linux scheduler",
+        title: "RL Kernel Schduler",
+        description:
+            "A custom reinforcement learning powered process scheduler integrated into the Linux kernel for adaptive, low-latency task scheduling.",
         image: Arch,
         btns: [
             {
                 icons: [GHW, GHB],
-                title: "Github",
-                link: "https://www.google.com",
+                title: "Github Repo",
+                link: "https://github.com/vrushang1234/arch-kernel",
             },
         ],
     },
     {
         id: 2,
-        title: "FPGA HFT Engine",
-        description: "Artix-7 order matching",
+        title: "FPGA Trading Engine",
+        description:
+            "An FPGA-based HFT system combining hardware order matching with an on-chip TPU implemented in FPGA fabric for low-latency reinforcement learning inference.",
         image: Trading,
-        btns: [],
+        btns: [
+            {
+                icons: [GHW, GHB],
+                title: "Github Repo",
+                link: "https://github.com/vrushang1234/hft-system",
+            },
+        ],
     },
     {
         id: 3,
         title: "Hyperloop Controls",
-        description: "Embedded control stack",
+        description: "Rust powered control systems for UCI HyperXite",
         image: HX,
-        btns: [],
+        btns: [
+            {
+                icons: [GHW, GHB],
+                title: "Github Repo",
+                link: "https://github.com/vrushang1234/hft-system",
+            },
+        ],
     },
     {
         id: 4,
-        title: "Solar Telemetry",
-        description: "CAN + WebSocket",
-        image: SC,
-        btns: [],
-    },
-    {
-        id: 5,
         title: "UCI ENGR Room Reservation ",
-        description: "CAN + WebSocket",
+        description: "Room Reservation System for UCI Engineering Clubs",
         image: ICS,
-        btns: [],
+        btns: [
+            {
+                icons: [WWW, WWB],
+                title: "Website",
+                link: "https://ics-259.vercel.app/",
+            },
+        ],
     },
     {
         id: 6,
         title: "ESC Website",
-        description: "CAN + WebSocket",
+        description:
+            "Website for Engineering Student Council at UCI for event updates and registration.",
         image: ESC,
-        btns: [],
+        btns: [
+            {
+                icons: [WWW, WWB],
+                title: "Website",
+                link: "https://esc.eng.uci.edu/",
+            },
+        ],
     },
 ];
 export default function Projects() {
@@ -154,22 +176,26 @@ export default function Projects() {
                                                 target="_blank"
                                             >
                                                 <button className="project-button">
-                                                    <span className="icon-wrapper">
-                                                        <img
-                                                            className="icon icon-default"
-                                                            src={
-                                                                project.icons[1]
-                                                            }
-                                                            alt=""
-                                                        />
-                                                        <img
-                                                            className="icon icon-hover"
-                                                            src={
-                                                                project.icons[0]
-                                                            }
-                                                            alt=""
-                                                        />
-                                                    </span>
+                                                    {project.icons && (
+                                                        <span className="icon-wrapper">
+                                                            <img
+                                                                className="icon icon-default"
+                                                                src={
+                                                                    project
+                                                                        .icons[1]
+                                                                }
+                                                                alt=""
+                                                            />
+                                                            <img
+                                                                className="icon icon-hover"
+                                                                src={
+                                                                    project
+                                                                        .icons[0]
+                                                                }
+                                                                alt=""
+                                                            />
+                                                        </span>
+                                                    )}
                                                     {project.title}
                                                 </button>
                                             </a>
