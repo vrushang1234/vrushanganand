@@ -51,6 +51,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 80%;
 }
 
 .contact-text > h1 {
@@ -62,7 +63,7 @@
 }
 
 .contact-button {
-    margin-top: 5%;
+    margin-top: 10%;
     font-size: 1.4rem;
     padding: 10px 20px 10px 20px;
     background-color: rgb(212, 83, 102, 0.85);

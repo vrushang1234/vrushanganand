@@ -23,10 +23,10 @@ export default function About() {
                 className="about-text"
                 style={gradientStyle(gradientOffset, opacity, scale)}
             >
-                I am a Computer Engineering student focused on high-performance
-                systems at the intersection of operating systems, machine
-                learning, and hardware. I design adaptive systems under strict
-                latency and resource constraints.
+                Computer Engineering student focused on high-performance systems
+                at the intersection of operating systems, machine learning, and
+                hardware. I design adaptive systems under strict latency and
+                resource constraints.
             </h3>
         </div>
     );
