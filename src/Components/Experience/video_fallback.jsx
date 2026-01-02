@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from "react";
 
 export default function VideoWithFallback({ src, poster, className }) {
     const videoRef = useRef(null);
-    const [showFallback, setShowFallback] = useState(false);
+    const [showFallback, setShowFallback] = useState(!src);
 
     useEffect(() => {
+        if (!src) return;
+
         const video = videoRef.current;
         if (!video) return;
 
@@ -27,7 +29,6 @@ export default function VideoWithFallback({ src, poster, className }) {
 
         tryPlay();
 
-        // If it never starts within 300ms → assume blocked
         const timeout = setTimeout(() => {
             if (video.paused) setShowFallback(true);
         }, 300);
@@ -37,7 +38,11 @@ export default function VideoWithFallback({ src, poster, className }) {
             video.removeEventListener("playing", onPlaying);
             video.removeEventListener("error", onError);
         };
-    }, []);
+    }, [src]);
+
+    if (!src) {
+        return <img src={poster} alt="" className={className} />;
+    }
 
     return (
         <>

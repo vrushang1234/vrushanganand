@@ -23,10 +23,10 @@ export default function About() {
                 className="about-text"
                 style={gradientStyle(gradientOffset, opacity, scale)}
             >
-                I am a student at University of California, Irvine, currently
-                pursuing my bachelor's in Computer Engineering and minor in
-                Computer Science. My hobbies are cooking food and coding. I also
-                play video games occasionally.
+                I am a Computer Engineering student focused on high-performance
+                systems at the intersection of operating systems, machine
+                learning, and hardware. I design adaptive systems under strict
+                latency and resource constraints.
             </h3>
         </div>
     );

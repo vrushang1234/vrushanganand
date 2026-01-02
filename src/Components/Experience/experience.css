@@ -156,6 +156,7 @@
 
 .carousel-slide img {
     height: 90%;
+    width: 80%;
     object-fit: contain;
     user-select: none;
     pointer-events: none;
