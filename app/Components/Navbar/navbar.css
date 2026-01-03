@@ -53,6 +53,7 @@
     border: none;
     color: white;
     min-height: 30px;
+    height: 100%;
     width: 120px;
 
     font-size: 1.2rem;
@@ -135,6 +136,7 @@
 
     .navbar-buttons button {
         width: 100%;
+        height: auto;
         font-size: 1.2rem;
     }
 

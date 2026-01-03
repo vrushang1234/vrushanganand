@@ -1,0 +1,36 @@
+.indiv-article {
+    color: white;
+}
+.indiv-article h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 2%;
+}
+
+.article-body {
+    width: 70%;
+    margin: 5% 15% 5% 15%;
+}
+
+.article-body p {
+    font-size: 1.3rem;
+    margin-top: 0.5%;
+    line-height: 1.2;
+}
+
+.article-body h2 {
+    font-size: 1.7rem;
+    margin-top: 3%;
+}
+
+.article-img-div {
+    width: 100%;
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.article-img-div a {
+    color: white;
+}
