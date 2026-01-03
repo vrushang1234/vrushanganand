@@ -1,3 +1,4 @@
+"use client";
 import "./skills.css";
 import { useRef } from "react";
 

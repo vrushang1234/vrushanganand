@@ -1,20 +1,3 @@
-import HyperXite from "../../assets/Videos/HyperXite.mp4";
-import SolarCar from "../../assets/Videos/SolarCar.mp4";
-import HyperXitePoster from "../../assets/Pictures/HyperXite/hyperxite.webp";
-import SolarCarPoster from "../../assets/Pictures/SolarCar/solarcar.webp";
-import HyperXiteFSM from "../../assets/Pictures/HyperXite/FSM.png";
-import HyperXiteThreading from "../../assets/Pictures/HyperXite/Threading.png";
-import HyperXitePod from "../../assets/Pictures/HyperXite/hxpod.webp";
-import HyperXiteTeam from "../../assets/Pictures/HyperXite/HXTeam.JPG";
-
-import SolarCarTeam from "../../assets/Pictures/SolarCar/SolarCarTeam.webp";
-import SolarDashboard from "../../assets/Pictures/SolarCar/dashboard.png";
-import SolarTelem from "../../assets/Pictures/SolarCar/telemetery.png";
-import SolarCarPic from "../../assets/Pictures/SolarCar/solarcar1.webp";
-
-import RCPS from "../../assets/Pictures/RCPS/RCPS.png";
-import SwipeTax from "../../assets/Pictures/SwipeTax/swipetax_logo.jpg";
-
 const experienceData = [
     {
         id: "rcps",
@@ -22,7 +5,7 @@ const experienceData = [
         date: "Mar 2025 - Present",
         description:
             "The Resilient Cyber-Physical Systems (RCPS) Lab at UC Irvine focuses on designing resilient, secure, and privacy-preserving cyber-physical systems, combining theory and real-world systems across robotics, IoT, and embedded intelligence.",
-        poster: RCPS,
+        poster: "/assets/Pictures/RCPS/RCPS.png",
         posHeader: "Undergraduate Researcher",
         posDescription: [
             "I developed an efficient PyTorch-based pipeline, accelerated with CUDA, for computing multivariate Bernstein polynomial coefficients using the Matrix Method. The implementation was designed to scale to high-dimensional inputs while maintaining numerical stability, enabling practical use of Bernstein representations in learning and analysis workflows.",
@@ -31,55 +14,54 @@ const experienceData = [
             "Building on this work, I implemented a custom neural network architecture incorporating Bernstein polynomial activation functions and integrated it into Stable-Baselines3. I evaluated the approach using PPO and A2C, benchmarking learning efficiency and policy optimization behavior against standard architectures to study the tradeoffs between expressiveness, stability, and performance.",
         ],
     },
+
     {
         id: "hyperxite",
         title: "HyperXite",
         date: "Aug 2023 – June 2025",
         description:
-            "HyperXite is a student led undergraduate project team, aimed at building a prototype for the SpaceX Hyperloop project and participating in global Hyperloop competitions.",
-        video: HyperXite,
-        poster: HyperXitePoster,
+            "HyperXite is a student-led undergraduate project team building a prototype for the SpaceX Hyperloop project and competing globally.",
+        video: "/assets/Videos/HyperXite.mp4",
+        poster: "/assets/Pictures/HyperXite/hyperxite.webp",
         posHeader: "Control Systems Engineer",
         posDescription: [
             "I led the design and implementation of a C++ based control system to coordinate the pod’s propulsion, pneumatics, and braking subsystems. The Finite State Machine enforced strict safety guarantees while enabling efficient real-time operation, ensuring predictable behavior across all operational states.",
-
             "To support closed-loop control, we integrated a diverse set of sensors, including an IMU, wheel encoders, LiDAR, Hall effect sensors, and thermistors, using I²C and GPIO interfaces. Sensor acquisition and control logic were implemented using multithreaded programming, allowing concurrent data collection, processing, and actuation without violating real-time constraints.",
-
             "To enable remote operation and observability, we developed an interactive React-based control interface backed by WebSocket communication. This system provided live telemetry visualization and bidirectional control between the FSM and a remote control station, with telemetry efficiently cached and streamed to a central database for monitoring and analysis.",
-
             "What I enjoyed most was working at the boundary between software and physical systems - where timing matters, assumptions break, and every bug has a real-world consequence.",
         ],
         images: [
             {
                 id: 1,
-                url: HyperXitePod,
+                url: "/assets/Pictures/HyperXite/hxpod.webp",
                 title: "The HyperXite Pod",
             },
             {
                 id: 2,
-                url: HyperXiteFSM,
+                url: "/assets/Pictures/HyperXite/FSM.png",
                 title: "FSM Schematic",
             },
             {
                 id: 3,
-                url: HyperXiteThreading,
+                url: "/assets/Pictures/HyperXite/Threading.png",
                 title: "Multithreading Schematic",
             },
             {
                 id: 4,
-                url: HyperXiteTeam,
+                url: "/assets/Pictures/HyperXite/HXTeam.JPG",
                 title: "Team Photo",
             },
         ],
     },
+
     {
         id: "solarcar",
         title: "Solar Car",
         date: "April 2024 – June 2025",
         description:
-            "UCI Solar Car is a team of undergraduate engineers pushing the boundaries of sustainable transportation through solar-powered vehicle design.",
-        video: SolarCar,
-        poster: SolarCarPoster,
+            "UCI Solar Car is a team of undergraduate engineers pushing the boundaries of sustainable transportation.",
+        video: "/assets/Videos/SolarCar.mp4",
+        poster: "/assets/Pictures/SolarCar/solarcar.webp",
         posHeader: "Low Voltage Engineer",
         posDescription: [
             "I implemented a telemetry and fault detection system using ESP32 microcontrollers to collect, packetize, and transmit sensor data over a custom radio link. On the receiver side, telemetry was decoded from CAN bus message IDs, enabling structured access to data from the motor, battery management system (BMS), onboard sensors, and communication subsystems. I designed and implemented fault detection logic across these components to ensure safe and reliable operation under real-time conditions.",
@@ -89,22 +71,22 @@ const experienceData = [
         images: [
             {
                 id: 1,
-                url: SolarCarPic,
+                url: "/assets/Pictures/SolarCar/solarcar1.webp",
                 title: "The Solar Car",
             },
             {
                 id: 2,
-                url: SolarDashboard,
-                title: "The Dashboard Flowchart",
+                url: "/assets/Pictures/SolarCar/dashboard.png",
+                title: "Dashboard Flowchart",
             },
             {
                 id: 3,
-                url: SolarTelem,
+                url: "/assets/Pictures/SolarCar/telemetery.png",
                 title: "Radio Telemetry Flowchart",
             },
             {
                 id: 4,
-                url: SolarCarTeam,
+                url: "/assets/Pictures/SolarCar/SolarCarTeam.webp",
                 title: "Team Photo",
             },
         ],
@@ -115,8 +97,8 @@ const experienceData = [
         title: "SwipeTax",
         date: "Sep 2024 - Mar 2025",
         description:
-            "SwipeTax is an all-in-one platform for automated bookkeeping, real-time business insights, and tax-ready reporting. Designed for speed and simplicity, it turns tedious accounting into a seamless, scalable workflow for growing businesses.",
-        poster: SwipeTax,
+            "SwipeTax is an all-in-one platform for automated bookkeeping, real-time insights, and tax-ready reporting.",
+        poster: "/assets/Pictures/SwipeTax/swipetax_logo.jpg",
         posHeader: "Software Engineering Intern",
         posDescription: [
             "I developed a full-stack accounting platform for freelancers and small businesses using React, Node.js, and AWS EC2, with a focus on intuitive user experience and streamlined financial workflows. The platform was designed to reduce friction in everyday bookkeeping while remaining scalable and reliable.",

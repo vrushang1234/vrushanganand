@@ -1,7 +1,9 @@
+"use client";
 import "./intro.css";
 import { useRef } from "react";
 
 import { useScrollGradient } from "../../useScrollGradient";
+
 import gradientStyle from "../../gradientStyle";
 
 export default function Intro() {

@@ -21,6 +21,11 @@
     height: 50vh;
     margin: 5% 0;
     overflow: hidden;
+    border-radius: 50px;
+    box-shadow:
+        0 20px 60px rgba(255, 170, 180, 0.25),
+        0 12px 40px rgba(255, 140, 160, 0.22),
+        0 6px 24px rgba(255, 120, 150, 0.18);
 }
 
 .video-preview {

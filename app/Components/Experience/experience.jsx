@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./experience.css";
@@ -71,7 +72,7 @@ export default function Experience() {
                 <div
                     key={exp.id}
                     ref={(el) => (cardRefs.current[exp.id] = el)}
-                    className="video-container"
+                    className="video-container glow"
                 >
                     <VideoWithFallback
                         src={exp.video}

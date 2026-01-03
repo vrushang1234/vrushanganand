@@ -1,0 +1,20 @@
+* {
+    margin: 0 0 0 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+button,
+a,
+input,
+select,
+textarea,
+[role="button"] {
+    cursor: inherit;
+}
+
+body {
+    cursor:
+        url("/assets/Pictures/cursor.png") 25 25,
+        auto;
+    background: #0d0d0d;
+}

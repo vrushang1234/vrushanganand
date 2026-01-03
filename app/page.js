@@ -5,10 +5,10 @@ import Footer from "./Components/Footer/footer";
 import Intro from "./Components/Intro/intro";
 import Projects from "./Components/Projects/projects";
 import Skills from "./Components/Skills/skills";
-import "./index.css";
-export default function App() {
+
+export default function Home() {
     return (
-        <div>
+        <>
             <Intro />
             <About />
             <Experience />
@@ -16,6 +16,6 @@ export default function App() {
             <Skills />
             <Contact />
             <Footer />
-        </div>
+        </>
     );
 }

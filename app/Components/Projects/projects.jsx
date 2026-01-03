@@ -1,3 +1,4 @@
+"use client";
 import "./projects.css";
 import { motion, useMotionValue, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -5,27 +6,19 @@ import { useEffect, useRef, useState } from "react";
 import { useScrollGradient } from "../../useScrollGradient";
 import gradientStyle from "../../gradientStyle";
 
-import HX from "../../assets/Projects/HX.webp";
-import SC from "../../assets/Projects/SC.webp";
-import Trading from "../../assets/Projects/Trading.webp";
-import Arch from "../../assets/Projects/arch.png";
-import ESC from "../../assets/Projects/ESC.png";
-import ICS from "../../assets/Projects/ICS259.png";
-import GHW from "../../assets/Pictures/github-white.png";
-import GHB from "../../assets/Pictures/github-black.png";
-import WWB from "../../assets/Pictures/web-black.png";
-import WWW from "../../assets/Pictures/web-white.png";
-
 const projects = [
     {
         id: 1,
-        title: "RL Kernel Schduler",
+        title: "RL Kernel Scheduler",
         description:
             "A custom reinforcement learning powered process scheduler integrated into the Linux kernel for adaptive, low-latency task scheduling.",
-        image: Arch,
+        image: "/assets/Projects/arch.png",
         btns: [
             {
-                icons: [GHW, GHB],
+                icons: [
+                    "/assets/Pictures/github-white.png",
+                    "/assets/Pictures/github-black.png",
+                ],
                 title: "Github Repo",
                 link: "https://github.com/vrushang1234/arch-kernel",
             },
@@ -36,10 +29,13 @@ const projects = [
         title: "FPGA Trading Engine",
         description:
             "An FPGA-based HFT system combining hardware order matching with an on-chip TPU implemented in FPGA fabric for low-latency reinforcement learning inference.",
-        image: Trading,
+        image: "/assets/Projects/Trading.webp",
         btns: [
             {
-                icons: [GHW, GHB],
+                icons: [
+                    "/assets/Pictures/github-white.png",
+                    "/assets/Pictures/github-black.png",
+                ],
                 title: "Github Repo",
                 link: "https://github.com/vrushang1234/hft-system",
             },
@@ -48,11 +44,14 @@ const projects = [
     {
         id: 3,
         title: "Hyperloop Controls",
-        description: "Rust powered control systems for UCI HyperXite",
-        image: HX,
+        description: "Rust-powered control systems for UCI HyperXite.",
+        image: "/assets/Projects/HX.webp",
         btns: [
             {
-                icons: [GHW, GHB],
+                icons: [
+                    "/assets/Pictures/github-white.png",
+                    "/assets/Pictures/github-black.png",
+                ],
                 title: "Github Repo",
                 link: "https://github.com/vrushang1234/hft-system",
             },
@@ -60,12 +59,15 @@ const projects = [
     },
     {
         id: 4,
-        title: "UCI ENGR Room Reservation ",
-        description: "Room Reservation System for UCI Engineering Clubs",
-        image: ICS,
+        title: "UCI ENGR Room Reservation",
+        description: "Room reservation system for UCI Engineering clubs.",
+        image: "/assets/Projects/ICS259.png",
         btns: [
             {
-                icons: [WWW, WWB],
+                icons: [
+                    "/assets/Pictures/web-white.png",
+                    "/assets/Pictures/web-black.png",
+                ],
                 title: "Website",
                 link: "https://ics-259.vercel.app/",
             },
@@ -75,17 +77,21 @@ const projects = [
         id: 6,
         title: "ESC Website",
         description:
-            "Website for Engineering Student Council at UCI for event updates and registration.",
-        image: ESC,
+            "Website for the Engineering Student Council at UCI for events and registration.",
+        image: "/assets/Projects/ESC.png",
         btns: [
             {
-                icons: [WWW, WWB],
+                icons: [
+                    "/assets/Pictures/web-white.png",
+                    "/assets/Pictures/web-black.png",
+                ],
                 title: "Website",
                 link: "https://esc.eng.uci.edu/",
             },
         ],
     },
 ];
+
 export default function Projects() {
     const projectsRef = useRef(null);
     const { opacity, scale, gradientOffset } = useScrollGradient(projectsRef, {
@@ -101,7 +107,7 @@ export default function Projects() {
     const x = useMotionValue(0);
 
     const [slidesPerView, setSlidesPerView] = useState(
-        window.innerWidth < 1024 ? 1 : 2,
+        typeof window !== "undefined" && window.innerWidth < 1024 ? 1 : 2,
     );
 
     useEffect(() => {
@@ -118,18 +124,14 @@ export default function Projects() {
         const firstSlide = containerRef.current.querySelector(
             ".projects-carousel-slide",
         );
-
         if (!firstSlide) return;
 
         const slideWidth = firstSlide.offsetWidth;
-        const slideStyle = getComputedStyle(firstSlide);
+        const style = getComputedStyle(firstSlide);
         const margin =
-            parseFloat(slideStyle.marginLeft) +
-            parseFloat(slideStyle.marginRight);
+            parseFloat(style.marginLeft) + parseFloat(style.marginRight);
 
-        const fullSlideWidth = slideWidth + margin;
-
-        animate(x, -index * fullSlideWidth, {
+        animate(x, -index * (slideWidth + margin), {
             type: "spring",
             stiffness: 280,
             damping: 30,
@@ -163,43 +165,35 @@ export default function Projects() {
                                 <p className="project-desc">
                                     {proj.description}
                                 </p>
-                                <br />
+
                                 <div className="project-button-container">
-                                    {proj.btns &&
-                                        proj.btns.map((project) => (
-                                            <a
-                                                href={project.link}
-                                                style={{
-                                                    textDecoration: "none",
-                                                }}
-                                                rel="norferrer noopener"
-                                                target="_blank"
-                                            >
-                                                <button className="project-button">
-                                                    {project.icons && (
-                                                        <span className="icon-wrapper">
-                                                            <img
-                                                                className="icon icon-default"
-                                                                src={
-                                                                    project
-                                                                        .icons[1]
-                                                                }
-                                                                alt=""
-                                                            />
-                                                            <img
-                                                                className="icon icon-hover"
-                                                                src={
-                                                                    project
-                                                                        .icons[0]
-                                                                }
-                                                                alt=""
-                                                            />
-                                                        </span>
-                                                    )}
-                                                    {project.title}
-                                                </button>
-                                            </a>
-                                        ))}
+                                    {proj.btns?.map((btn) => (
+                                        <a
+                                            key={btn.title}
+                                            href={btn.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style={{ textDecoration: "none" }}
+                                        >
+                                            <button className="project-button">
+                                                {btn.icons && (
+                                                    <span className="icon-wrapper">
+                                                        <img
+                                                            className="icon icon-default"
+                                                            src={btn.icons[1]}
+                                                            alt=""
+                                                        />
+                                                        <img
+                                                            className="icon icon-hover"
+                                                            src={btn.icons[0]}
+                                                            alt=""
+                                                        />
+                                                    </span>
+                                                )}
+                                                {btn.title}
+                                            </button>
+                                        </a>
+                                    ))}
                                 </div>
                             </div>
                         ))}
@@ -223,6 +217,7 @@ export default function Projects() {
                     >
                         &gt;
                     </button>
+
                     <div className="projects-carousel-dots">
                         {Array.from({ length: maxIndex + 1 }).map((_, i) => (
                             <button
