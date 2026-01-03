@@ -282,4 +282,8 @@
         height: 80%;
         width: 70%;
     }
+
+    .video-container {
+        width: 80%;
+    }
 }
