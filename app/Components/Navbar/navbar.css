@@ -82,16 +82,14 @@
 
     background: none;
     border: none;
-    cursor: pointer;
 
     z-index: 999;
 }
 
 .hamburger span {
-    height: 3px;
+    height: 2px;
     width: 100%;
     background: white;
-    border-radius: 2px;
     transition: 0.5s;
 }
 .hamburger.open span:nth-child(1) {
@@ -108,7 +106,7 @@
     .hamburger {
         display: flex;
         position: absolute;
-        right: 1%;
+        right: 2%;
         top: 50%;
         transform: translateY(-50%);
     }

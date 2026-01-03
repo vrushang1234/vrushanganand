@@ -1,9 +1,23 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./navbar.css";
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        if (open) {
+            document.body.style.overflow = "hidden";
+            document.body.style.touchAction = "none"; // iOS fix
+        } else {
+            document.body.style.overflow = "";
+            document.body.style.touchAction = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+            document.body.style.touchAction = "";
+        };
+    }, [open]);
 
     const scrollTo = (id) => {
         const el = document.getElementById(id);
