@@ -1,0 +1,84 @@
+.articles-container {
+    display: flex;
+    color: white;
+}
+
+.articles-about {
+    margin: 5% 0 0 5%;
+    width: 40%;
+}
+
+.vrushang-pic {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.vrushang-info {
+    margin-top: 10%;
+}
+
+.vrushang-info p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.icon-col {
+    width: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+.vrushang-info a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: white;
+}
+
+.vrushang-info img {
+    height: 1.1rem;
+    display: block;
+}
+
+.vrushang-info a:hover {
+    color: #326ba8;
+}
+
+.vrushang-info > h1 {
+    font-size: 2rem;
+    margin-bottom: 2%;
+}
+
+.vrushang-info > p {
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.articles-list {
+    margin-top: 5%;
+}
+
+.article-link {
+    text-decoration: none;
+    color: white;
+    transition: transform 0.5s;
+    display: inline-block;
+}
+
+.article-link:hover {
+    color: #326ba8;
+    transform: scale(1.02);
+}
+
+.articles-list h2 {
+    font-size: 2rem;
+    text-decoration: underline;
+    text-underline-offset: 7px;
+}
+
+.articles-list p {
+    margin-top: 15px;
+    font-size: 1.3rem;
+}

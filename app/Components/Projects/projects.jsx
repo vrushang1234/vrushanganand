@@ -53,7 +53,7 @@ const projects = [
                     "/assets/Pictures/github-black.png",
                 ],
                 title: "Github Repo",
-                link: "https://github.com/vrushang1234/hft-system",
+                link: "https://github.com/UCI-HyperXite/hx9-control-system",
             },
         ],
     },
