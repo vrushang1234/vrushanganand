@@ -11,6 +11,10 @@ textarea,
 [role="button"] {
     cursor: inherit;
 }
+section,
+[id] {
+    scroll-margin-top: 100px;
+}
 
 body {
     cursor:

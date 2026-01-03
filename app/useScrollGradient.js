@@ -10,6 +10,7 @@ export function useScrollGradient(
         fadeOutEnd,
         baseOffset = 70,
         offsetSpeed = 60,
+        topOffset = 0,
     },
 ) {
     const [opacity, setOpacity] = useState(0);
@@ -26,11 +27,12 @@ export function useScrollGradient(
         const handleScroll = () => {
             const vh = window.innerHeight;
             const rect = ref.current.getBoundingClientRect();
+            const adjustedTop = rect.top - topOffset;
 
             const localScroll =
                 mode === "exit"
-                    ? Math.max(0, -rect.top) // hero / intro
-                    : Math.max(0, vh - rect.top); // normal sections
+                    ? Math.max(0, -adjustedTop)
+                    : Math.max(0, vh - adjustedTop);
 
             let newOpacity;
 
@@ -92,6 +94,7 @@ export function useScrollGradient(
         offsetSpeed,
         hasFadeIn,
         hasFadeOut,
+        topOffset,
     ]);
 
     return { opacity, scale, gradientOffset };

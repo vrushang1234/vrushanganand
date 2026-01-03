@@ -57,7 +57,7 @@ export default function Skills() {
     });
 
     return (
-        <div className="skills-section-container" ref={skillsRef}>
+        <div className="skills-section-container" id="skills" ref={skillsRef}>
             <h1
                 className="skills-section-header"
                 style={gradientStyle(gradientOffset, opacity, scale)}

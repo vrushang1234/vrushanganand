@@ -16,17 +16,16 @@ export default function Intro() {
         fadeOutStart: 0.15,
         fadeOutEnd: 0.9,
         baseOffset: 20,
-        offsetSpeed: 80,
+        offsetSpeed: 90,
     });
 
     return (
-        <div className="intro-container" ref={introRef}>
+        <div className="intro-container" id="intro" ref={introRef}>
             <h3
                 className="intro"
                 style={gradientStyle(gradientOffset, opacity, scale)}
             >
-                Hey there,
-                <br />I am Vrushang
+                ML and Systems Engineer
             </h3>
         </div>
     );

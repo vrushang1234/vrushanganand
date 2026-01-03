@@ -141,7 +141,7 @@ export default function Projects() {
     const maxIndex = Math.max(0, projects.length - slidesPerView);
 
     return (
-        <div className="projects-container" ref={projectsRef}>
+        <div className="projects-container" id="projects" ref={projectsRef}>
             <h1
                 className="projects-header"
                 style={gradientStyle(gradientOffset, opacity, scale)}

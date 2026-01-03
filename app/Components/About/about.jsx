@@ -10,16 +10,17 @@ export default function About() {
 
     const { opacity, scale, gradientOffset } = useScrollGradient(aboutRef, {
         mode: "enter",
-        fadeInStart: 0.7,
-        fadeInEnd: 1.2,
-        fadeOutStart: 1.7,
-        fadeOutEnd: 2.4,
+        fadeInStart: 0.5,
+        fadeInEnd: 0.9,
+        fadeOutStart: 1.3,
+        fadeOutEnd: 1.5,
         baseOffset: 50,
-        offsetSpeed: 45,
+        offsetSpeed: 35,
+        topOffset: 80,
     });
 
     return (
-        <div className="about-container" ref={aboutRef}>
+        <div className="about-container" id="about" ref={aboutRef}>
             <h3
                 className="about-text"
                 style={gradientStyle(gradientOffset, opacity, scale)}

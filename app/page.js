@@ -3,12 +3,14 @@ import Contact from "./Components/Contact/contact";
 import Experience from "./Components/Experience/experience";
 import Footer from "./Components/Footer/footer";
 import Intro from "./Components/Intro/intro";
+import Navbar from "./Components/Navbar/navbar";
 import Projects from "./Components/Projects/projects";
 import Skills from "./Components/Skills/skills";
 
 export default function Home() {
     return (
         <>
+            <Navbar />
             <Intro />
             <About />
             <Experience />

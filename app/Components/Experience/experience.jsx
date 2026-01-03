@@ -28,7 +28,7 @@ export default function Experience() {
             fadeInEnd: 0.6,
             fadeOutStart: 1.2,
             fadeOutEnd: 1.6,
-            baseOffset: 30,
+            baseOffset: 40,
             offsetSpeed: 35,
         },
     );
@@ -59,7 +59,11 @@ export default function Experience() {
     };
 
     return (
-        <div className="experience-container" ref={experienceRef}>
+        <div
+            className="experience-container"
+            id="experience"
+            ref={experienceRef}
+        >
             <h1
                 className="experience-header"
                 style={gradientStyle(gradientOffset, opacity, scale)}
