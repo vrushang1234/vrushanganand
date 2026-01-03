@@ -1,6 +1,6 @@
 .skills-section-header {
     text-align: center;
-    font-size: 5rem;
+    font-size: 3rem;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -31,7 +31,7 @@
 }
 
 .skills-title {
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .skills-container li {
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     text-align: center;
     margin-top: 2.5%;
     color: white;

@@ -11,10 +11,10 @@ export default function About() {
     const { opacity, scale, gradientOffset } = useScrollGradient(aboutRef, {
         mode: "enter",
         fadeInStart: 0.5,
-        fadeInEnd: 0.9,
-        fadeOutStart: 1.3,
-        fadeOutEnd: 1.5,
-        baseOffset: 50,
+        fadeInEnd: 1,
+        fadeOutStart: 1.5,
+        fadeOutEnd: 1.8,
+        baseOffset: 40,
         offsetSpeed: 35,
         topOffset: 80,
     });
