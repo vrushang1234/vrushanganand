@@ -235,13 +235,13 @@
 }
 @media (max-width: 768px) {
     .experience-header {
-        font-size: 3rem;
-    }
-    .video-overlay h1 {
         font-size: 2rem;
     }
+    .video-overlay h1 {
+        font-size: 1.5rem;
+    }
     .video-overlay h2 {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .pos-header {
@@ -249,6 +249,11 @@
     }
 
     .video-overlay p {
+        font-size: 1rem;
+    }
+
+    .overlay-btn-open {
+        padding: 10px 20px;
         font-size: 1rem;
     }
 

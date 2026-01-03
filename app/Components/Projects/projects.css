@@ -224,7 +224,7 @@
 
 @media (max-width: 768px) {
     .projects-header {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     .project-title {
@@ -262,6 +262,10 @@
 
     .projects-carousel-dots {
         bottom: 8%;
+    }
+
+    .project-button-container {
+        bottom: 10px;
     }
 }
 

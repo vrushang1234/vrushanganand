@@ -124,20 +124,20 @@
         width: 100%;
         background-color: #171717;
 
-        transform: translateY(-1000%);
-        transition: transform 0.25s ease;
+        transform: translateY(-200%);
+        transition: transform 0.5s ease;
         z-index: 997;
     }
 
     .navbar-buttons.open {
-        transform: translateY(0);
+        transform: translateY(-60);
         width: 100%;
         margin-right: 0;
     }
 
     .navbar-buttons a {
         width: 100%;
-        height: 50px;
+        height: 30px;
         justify-content: center;
     }
 
