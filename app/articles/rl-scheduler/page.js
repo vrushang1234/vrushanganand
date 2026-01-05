@@ -16,7 +16,7 @@ export default function RlScheduler() {
                     <p>
                         Linux schedulers are built on carefully tuned
                         heuristics. However, they are static and apply the same
-                        workload across all workloads. Modern systems run a wide
+                        rules across all workloads. Modern systems run a wide
                         range of workloads, from latency-sensitive tasks to long
                         and heavy workloads. A single, fixed scheduling policy
                         cannot optimally serve all of these use cases.
@@ -137,7 +137,7 @@ export default function RlScheduler() {
 
                     <p>
                         These virtual deadlines are calculated using a task’s
-                        <i>vruntime</i> and its NICE value, which allows users
+                        <i> vruntime</i> and its NICE value, which allows users
                         to manually prioritize or deprioritize tasks. The
                         virtual deadline is computed as follows:
                     </p>
@@ -153,15 +153,16 @@ export default function RlScheduler() {
                         task_weight is derived from the custom NICE value
                         provided by the user. The slice parameter defines the
                         default duration for which a task is allowed to execute
-                        and is set to 70,000 by default unless overridden.
+                        and is set to 700,000 by default unless overridden.
                     </p>
                     <p>
                         CFS selects the task with the lowest virtual deadline
                         from the runqueue and begins executing it. The task
                         continues to run until its deadline exceeds that of the
                         next task in the runqueue and it has executed for at
-                        least the default slice duration (70,000 µs). At this
-                        point, the task is preempted and a new task is scheduled
+                        least the default slice duration (700,000 µs). At this
+                        point, the current state of the CPU while running this
+                        task is stored in a struct and a new task is scheduled
                         to run.
                     </p>
                     <div className="code-block">
@@ -172,6 +173,118 @@ export default function RlScheduler() {
                         <Prism language="c" style={atomDark} showLineNumbers>
                             {deadline_code}
                         </Prism>
+                    </div>
+                    <h2>Adaptive Learning</h2>
+                    <p>
+                        Up to this point, we have seen how Linux relies on fixed
+                        rules to balance fairness and responsiveness. In
+                        practice, however, different workloads place very
+                        different demands on the scheduler, often requiring
+                        distinct scheduling strategies for optimal performance.
+                        This raises a natural question: instead of relying on
+                        fixed rules, can the scheduler learn to adapt to
+                        changing workloads and make smarter scheduling
+                        decisions?
+                    </p>
+                    <p>
+                        As we saw earlier, the virtual deadline of a task plays
+                        a crucial role in determining which task runs next. But
+                        what if, instead of relying on fixed heuristics, we
+                        could use learning-based methods to influence this
+                        virtual deadline?
+                    </p>
+
+                    <div>
+                        {
+                            "$$\\text{deadline} = \\text{vruntime} + \\text{slice} \\cdot \\frac{\\text{NICE\_0\_WEIGHT}}{\\text{task\_weight}}$$"
+                        }
+                    </div>
+
+                    <p>
+                        In the current design, the slice term is the same for
+                        every task and is set to 700,000 µs by default. Rather
+                        than keeping this value fixed, we can use reinforcement
+                        learning to adapt the slice dynamically based on
+                        observed workload behavior and system conditions.
+                        Metrics such as a task’s wait time, and burst time can
+                        be used to inform these decisions.
+                    </p>
+                    <h2>Proximal Policy Optimization (PPO)</h2>
+                    <p>
+                        Even though scheduling decisions are discrete and made
+                        periodically, the inputs to the scheduler such as burst
+                        time and wait time are continuous. For this case, a
+                        reinforcement learning algorithm like Proximal Policy
+                        Optimization (PPO) is well suited, as it can operate
+                        over continuous state spaces while producing stable
+                        policy updates.
+                    </p>
+                    <p>
+                        On a high level, it is a RL algorithm with an actor and
+                        a critic. The actor or the policy interacts with the
+                        environment and receives some reward from the
+                        environment and the critic evaluates how good the action
+                        taken is. This separation allows the policy to improve
+                        its decisions while relying on the critic for stable and
+                        low-variance learning signals. If you are interested in
+                        learning more about PPO, this is the{" "}
+                        <a href="https://arxiv.org/abs/1707.06347">
+                            original PPO paper
+                        </a>
+                        .
+                    </p>
+                    <h2>The Agent</h2>
+                    <p>
+                        To make scheduling decisions, I use a set of task-level
+                        and queue-level metrics as inputs to the agent. These
+                        include a task’s last wait time, average wait time, last
+                        burst time, and average burst time, as well as the
+                        runqueue’s average wait time and average burst time. The
+                        task-level metrics allow the agent to make decisions
+                        that are responsive to individual tasks, while the
+                        queue-level metrics ensure that these decisions account
+                        for overall system behavior and do not unfairly ignore
+                        other runnable tasks.
+                    </p>
+                    <p>
+                        As discussed earlier, I want to work on changing the
+                        default task time slice of 700,000 µs. Hence, the action
+                        space starts at 70,000 µs (one tenth of the default) to
+                        enable shorter execution windows and lower virtual
+                        deadlines for latency-sensitive tasks, and extends to
+                        1,120,000 µs in increments of 105,000 µs. The policy
+                        outputs a discrete probability distribution over these
+                        slice values, from which a slice is sampled and assigned
+                        to the task at each scheduling decision.
+                    </p>
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        {`
+                            $$
+                            s_t =
+                            \\begin{bmatrix}
+                            w^{(t)}_{\\text{last}} \\\\
+                            w^{(t)}_{\\text{avg}} \\\\
+                            b^{(t)}_{\\text{last}} \\\\
+                            b^{(t)}_{\\text{avg}} \\\\
+                            \\bar{w}_{\\text{rq}} \\\\
+                            \\bar{b}_{\\text{rq}}
+                            \\end{bmatrix}
+                            $$
+                        `}
+                        &emsp;&emsp;
+                        {`
+                            $$
+                            a_t \\in
+                            \\{70{,}000,\\; 175{,}000,\\; 280{,}000,\\; \\dots,\\; 1{,}120{,}000\\}
+                            \\, \\mu s
+                            $$
+                        `}
                     </div>
                 </div>
             </div>
