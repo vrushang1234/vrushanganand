@@ -2,7 +2,7 @@ import "../indiv-article.css";
 import MathJaxProvider from "../mathjaxProvider";
 
 import { Prism } from "react-syntax-highlighter";
-import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import vruntime_code from "./vruntime_code";
 import deadline_code from "./deadline_code";
@@ -121,7 +121,7 @@ export default function RlScheduler() {
                             Oversimplified version of kernel code to calculate
                             min_vruntime
                         </h3>
-                        <Prism language="c" style={atomDark} showLineNumbers>
+                        <Prism language="c" style={coldarkDark} showLineNumbers>
                             {vruntime_code}
                         </Prism>
                     </div>
@@ -160,7 +160,7 @@ export default function RlScheduler() {
                         from the runqueue and begins executing it. The task
                         continues to run until its deadline exceeds that of the
                         next task in the runqueue and it has executed for at
-                        least the default slice duration (700,000 µs). At this
+                        least the default slice duration (700,000 ns). At this
                         point, the current state of the CPU while running this
                         task is stored in a struct and a new task is scheduled
                         to run.
@@ -170,7 +170,7 @@ export default function RlScheduler() {
                             Oversimplified version of kernel code to calculate
                             deadline and preempt
                         </h3>
-                        <Prism language="c" style={atomDark} showLineNumbers>
+                        <Prism language="c" style={coldarkDark} showLineNumbers>
                             {deadline_code}
                         </Prism>
                     </div>
@@ -202,7 +202,7 @@ export default function RlScheduler() {
 
                     <p>
                         In the current design, the slice term is the same for
-                        every task and is set to 700,000 µs by default. Rather
+                        every task and is set to 700,000 ns by default. Rather
                         than keeping this value fixed, we can use reinforcement
                         learning to adapt the slice dynamically based on
                         observed workload behavior and system conditions.
@@ -248,14 +248,36 @@ export default function RlScheduler() {
                     </p>
                     <p>
                         As discussed earlier, I want to work on changing the
-                        default task time slice of 700,000 µs. Hence, the action
-                        space starts at 70,000 µs (one tenth of the default) to
+                        default task time slice of 700,000 ns. Hence, the action
+                        space starts at 70,000 ns (one tenth of the default) to
                         enable shorter execution windows and lower virtual
                         deadlines for latency-sensitive tasks, and extends to
-                        1,120,000 µs in increments of 105,000 µs. The policy
+                        1,120,000 ns in increments of 105,000 µs. The policy
                         outputs a discrete probability distribution over these
                         slice values, from which a slice is sampled and assigned
                         to the task at each scheduling decision.
+                    </p>
+                    <p>
+                        The next step was designing the reward function, a
+                        critical component that directly shapes the agent’s
+                        behavior. The primary objective was to minimize task
+                        wait times while avoiding excessive burst fragmentation
+                        and unnecessary context switches. To achieve this, the
+                        reward function was designed to favor low wait times,
+                        longer burst execution, and fewer context switches.
+                    </p>
+                    <p>
+                        A naive approach would be to define the reward solely
+                        based on the current task’s most recent metrics.
+                        However, such a formulation would result in a greedy
+                        policy that prioritizes short-term gains for the current
+                        task, potentially leading to starvation of other
+                        runnable tasks. To prevent this, I used runqueue-level
+                        signals, specifically average wait time and turnaround
+                        time, into the reward formulation. As a result, the
+                        reward function encourages minimizing overall
+                        context-switch overhead and average wait time while
+                        maximizing average turnaround time across the runqueue.
                     </p>
                     <div
                         style={{
@@ -273,8 +295,7 @@ export default function RlScheduler() {
                             b^{(t)}_{\\text{last}} \\\\
                             b^{(t)}_{\\text{avg}} \\\\
                             \\bar{w}_{\\text{rq}} \\\\
-                            \\bar{b}_{\\text{rq}}
-                            \\end{bmatrix}
+                            \\bar{b}_{\\text{rq}} \\end{bmatrix}
                             $$
                         `}
                         &emsp;&emsp;
@@ -285,6 +306,68 @@ export default function RlScheduler() {
                             \\, \\mu s
                             $$
                         `}
+                    </div>
+                    <div>
+                        {`
+                            $$
+                            R_t =
+                            - \\alpha \\cdot \\bar{w}_{rq}
+                            + \\beta \\cdot \\bar{b}_{rq}
+                            - \\gamma \\cdot c_t
+                            $$
+                        `}
+                    </div>
+                    <p>
+                        I use a neural network as the policy to make scheduling
+                        decisions based on the observed state. The policy
+                        network consists of two hidden layers with tanh
+                        activation functions, followed by a softmax output layer
+                        that produces a probability distribution over the
+                        discrete action space. The first hidden layer contains
+                        50 nodes, and the second contains 70 nodes. This
+                        relatively small architecture was chosen to minimize
+                        latency and memory overhead, which are critical
+                        constraints when deploying a model inside the kernel.
+                    </p>
+                    <h2>The Simulator</h2>
+                    <p>
+                        At this point, the next challenge was deciding where to
+                        train the RL agent. Training directly in the kernel was
+                        impractical, as it would require manually extracting
+                        logs to userspace, training there, and repeatedly
+                        updating the kernel with new parameters. To simplify
+                        this process and enable faster iteration, I decided to
+                        build a custom scheduler simulator in Python. The
+                        simulator attempts to replicate Linux’s CFS as closely
+                        as possible, with each subroutine and scheduling
+                        decision implemented to mirror the kernel logic. I also
+                        implemented a custom version of PPO, using separate
+                        neural networks for the actor and critic, and integrated
+                        it directly with the simulator. The code for this
+                        simulator can be found{" "}
+                        <a href="https://github.com/vrushang1234/nice-rl-agent/tree/main">
+                            here
+                        </a>
+                        .
+                    </p>
+                    <p>
+                        To train the agent, I created a set of synthetic task
+                        types, including long-lasting CPU-heavy tasks, tasks
+                        with short CPU bursts, and tasks with short I/O bursts.
+                        Multiple instances of these tasks were periodically
+                        added to the simulator, forming a dynamic workload. At
+                        each scheduling decision, the RL agent selected a time
+                        slice for the currently running task and trained on the
+                        resulting system behavior.
+                    </p>
+                    <div className="article-img-div">
+                        <img
+                            src="/assets/Pictures/Articles/RLSched/RL-CFS-Wait.png"
+                            style={{ width: "70%" }}
+                        />
+                        <i>
+                            Adaptive Scheduler vs Stock CFS Scheduler wait times
+                        </i>
                     </div>
                 </div>
             </div>
