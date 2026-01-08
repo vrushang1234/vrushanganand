@@ -6,12 +6,16 @@ import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import vruntime_code from "./vruntime_code";
 import deadline_code from "./deadline_code";
+import matrix_multiply_code from "./matrix_multiply";
+import tanh_code from "./tanh";
+import softmax_code from "./softmax";
+import forward_policy from "./policy";
 
 export default function RlScheduler() {
     return (
         <MathJaxProvider>
             <div className="indiv-article">
-                <h1>RL Kernel Scheduler</h1>
+                <h1>Adaptive Kernel Scheduler</h1>
                 <div className="article-body">
                     <p>
                         Linux schedulers are built on carefully tuned
@@ -360,6 +364,15 @@ export default function RlScheduler() {
                         slice for the currently running task and trained on the
                         resulting system behavior.
                     </p>
+                    <p>
+                        After training, I evaluated the adaptive scheduler
+                        against the stock CFS implementation in my simulator.
+                        Both schedulers were tested using identical workloads,
+                        with tasks having the same execution times and burst
+                        characteristics. I then compared their average wait
+                        times and burst times to assess the impact of the
+                        learned scheduling policy. The results are shown below.
+                    </p>
                     <div className="article-img-div">
                         <img
                             src="/assets/Pictures/Articles/RLSched/RL-CFS-Wait.png"
@@ -369,6 +382,107 @@ export default function RlScheduler() {
                             Adaptive Scheduler vs Stock CFS Scheduler wait times
                         </i>
                     </div>
+                    <p>
+                        The graphs above show the wait-time distributions for
+                        the stock CFS scheduler and the adaptive RL-based
+                        scheduler under identical workloads. The adaptive
+                        scheduler consistently maintains lower average wait
+                        times, with individual task wait times remaining within
+                        a narrow range. In contrast, the stock CFS scheduler
+                        exhibits significantly higher variance, with pronounced
+                        spikes indicating extreme wait times for certain tasks.
+                    </p>
+                    <div className="article-img-div">
+                        <img
+                            src="/assets/Pictures/Articles/RLSched/RL-CFS-TAT.png"
+                            style={{ width: "70%" }}
+                        />
+                        <i>
+                            Adaptive Scheduler vs Stock CFS Scheduler turnaround
+                            times
+                        </i>
+                    </div>
+                    <p>
+                        This graph shows the average turnaround time across the
+                        ten workloads evaluated. The adaptive scheduler
+                        outperforms the stock CFS scheduler in seven out of ten
+                        cases, indicating a consistent improvement in scheduling
+                        decisions under these workloads.
+                    </p>
+                    <h2>Kernel Policy Integration</h2>
+                    <p>
+                        Now that a working and trained policy is in place, the
+                        next step is to integrate it into the Linux kernel.
+                        However, this task is far from straightforward. In
+                        userspace, training and experimentation benefited from
+                        high-level tools such as Python, NumPy, and various
+                        machine learning libraries, which make implementing and
+                        iterating on neural network policies relatively easy. In
+                        contrast, deploying the same policy inside the kernel
+                        requires reimplementing it in C under strict resource
+                        and performance constraints.
+                    </p>
+                    <p>
+                        The first and most significant constraint was the lack
+                        of floating-point support in kernel space, unless
+                        floating-point registers are explicitly saved and
+                        restored, an approach that is both complex and costly.
+                        To address this, I adopted a Q-format fixed-point
+                        representation, where a fixed number of bits encode the
+                        integer portion of a value and the remaining bits
+                        represent the fractional component. However, this change
+                        introduced additional complexity, as all arithmetic
+                        operations, including multiplication and addition, had
+                        to be reimplemented to correctly support the chosen
+                        fixed-point format.
+                    </p>
+                    <p>
+                        I began by converting all of the trained weights and
+                        biases for the policy neural net to Qn.32. However, I
+                        think the level of precision for Qn.32 might have been
+                        an overkill. After this, I had to implement matrix
+                        multiplication, tanh, softmax and other helper functions
+                        for Qn.32 in C. The codes for which can be found below:
+                    </p>
+                    <div className="code-block">
+                        <h3>
+                            C code to convert to Qn.32 (Q32.32 in particular)
+                        </h3>
+                        <Prism language="c" style={coldarkDark} showLineNumbers>
+                            {`static inline q32_32 q32_from_int(s64 x){
+    __int128 t = (__int128)x << Q; return (q32_32)sat_s64(t); 
+}`}
+                        </Prism>
+                    </div>
+                    <div className="code-block">
+                        <h3>Matrix Multiplication</h3>
+                        <Prism language="c" style={coldarkDark} showLineNumbers>
+                            {matrix_multiply_code}
+                        </Prism>
+                    </div>
+                    <div className="code-block">
+                        <h3>Tanh calculation</h3>
+                        <Prism language="c" style={coldarkDark} showLineNumbers>
+                            {tanh_code}
+                        </Prism>
+                    </div>
+                    <div className="code-block">
+                        <h3>Softmax Calculation</h3>
+                        <Prism language="c" style={coldarkDark} showLineNumbers>
+                            {softmax_code}
+                        </Prism>
+                    </div>
+                    <div className="code-block">
+                        <h3>Forward Pass Neural Net Policy</h3>
+                        <Prism language="c" style={coldarkDark} showLineNumbers>
+                            {forward_policy}
+                        </Prism>
+                    </div>
+                    <p>
+                        With all these functions integrated, we can have our
+                        scheduler up and running by returning the output to
+                        update slice.
+                    </p>
                 </div>
             </div>
         </MathJaxProvider>
