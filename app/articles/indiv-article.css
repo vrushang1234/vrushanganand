@@ -106,7 +106,7 @@ td {
 @media (max-width: 768px) {
     .indiv-article h1 {
         font-size: 2rem;
-        margin-top: 5%;
+        margin: 10% 2% 10% 2%;
     }
 
     .article-body {
@@ -119,8 +119,13 @@ td {
         margin-top: 5%;
     }
 
+    .article-img-div i {
+        font-size: 0.7rem;
+    }
+
     .article-body h2 {
         font-size: 1.3rem;
+        margin-top: 10%;
     }
 
     .math-block mjx-container {
