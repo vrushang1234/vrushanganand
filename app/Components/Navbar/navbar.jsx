@@ -35,7 +35,7 @@ export default function Navbar() {
             <h1 className="navbar-title">Vrushang Anand</h1>
 
             <button
-                className={`hamburger ${open ? "open" : ""}`}
+                className={`hamburger ${open ? "hamburger-open" : ""}`}
                 onClick={() => setOpen((o) => !o)}
                 aria-label="Toggle navigation"
             >
