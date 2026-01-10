@@ -1,6 +1,8 @@
 .articles-container {
     display: flex;
+    flex-wrap: wrap;
     color: white;
+    margin-top: 60px;
 }
 
 .articles-about {
@@ -17,35 +19,6 @@
     margin-top: 10%;
 }
 
-.vrushang-info p {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.icon-col {
-    width: 1.6rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-}
-.vrushang-info a {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: white;
-}
-
-.vrushang-info img {
-    height: 1.1rem;
-    display: block;
-}
-
-.vrushang-info a:hover {
-    color: #326ba8;
-}
-
 .vrushang-info > h1 {
     font-size: 2rem;
     margin-bottom: 2%;
@@ -56,29 +29,107 @@
     margin-top: 10px;
 }
 
+.vrushang-info p,
+.vrushang-info a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vrushang-info a {
+    text-decoration: none;
+    color: white;
+}
+
+.vrushang-info a:hover {
+    color: #326ba8;
+}
+
+.vrushang-info img {
+    height: 1.1rem;
+    display: block;
+}
+
+.icon-col {
+    width: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
 .articles-list {
-    margin-top: 5%;
+    width: 50%;
+}
+
+.articles-list > h1 {
+    font-size: 2.5rem;
+    margin-top: 20px;
 }
 
 .article-link {
+    display: inline-block;
     text-decoration: none;
     color: white;
     transition: transform 0.5s;
-    display: inline-block;
 }
 
 .article-link:hover {
     color: #326ba8;
-    transform: scale(1.02);
 }
 
 .articles-list h2 {
-    font-size: 2rem;
+    margin-top: 2%;
+    font-size: 1.4rem;
     text-decoration: underline;
     text-underline-offset: 7px;
 }
 
 .articles-list p {
     margin-top: 15px;
-    font-size: 1.3rem;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .vrushang-pic {
+        width: 50%;
+    }
+
+    .vrushang-info {
+        margin-top: 5%;
+        width: 100%;
+    }
+
+    .vrushang-info > h1 {
+        font-size: 1.3rem;
+    }
+
+    .vrushang-info > p {
+        font-size: 0.8rem;
+        margin-top: 5px;
+    }
+
+    .vrushang-info > a {
+        font-size: 1rem;
+        margin-top: 5px;
+    }
+
+    .articles-list {
+        width: 100%;
+        margin-top: 10%;
+        margin-left: 5%;
+    }
+
+    .articles-list h1 {
+        font-size: 1.5rem;
+    }
+
+    .articles-list h2 {
+        font-size: 1rem;
+        margin-top: 5%;
+    }
+
+    .articles-list p {
+        font-size: 1rem;
+    }
 }

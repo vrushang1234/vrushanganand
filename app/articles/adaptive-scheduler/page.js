@@ -15,6 +15,9 @@ export default function RlScheduler() {
     return (
         <MathJaxProvider>
             <div className="indiv-article">
+                <a className="overlay-btn-close" href="/articles">
+                    &lt; Back
+                </a>
                 <h1>Adaptive Kernel Scheduler</h1>
                 <div className="article-body">
                     <p>

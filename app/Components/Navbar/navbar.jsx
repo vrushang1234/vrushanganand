@@ -8,7 +8,7 @@ export default function Navbar() {
     useEffect(() => {
         if (open) {
             document.body.style.overflow = "hidden";
-            document.body.style.touchAction = "none"; // iOS fix
+            document.body.style.touchAction = "none";
         } else {
             document.body.style.overflow = "";
             document.body.style.touchAction = "";
@@ -52,6 +52,9 @@ export default function Navbar() {
                 </button>
                 <button onClick={() => scrollTo("projects")}>Projects</button>
                 <button onClick={() => scrollTo("contact")}>Contact Me</button>
+                <a href="/articles">
+                    <button className="navbar-article-button">Articles</button>
+                </a>
             </nav>
         </header>
     );

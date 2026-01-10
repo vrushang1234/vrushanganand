@@ -40,6 +40,26 @@
     -webkit-text-fill-color: transparent;
 }
 
+.navbar-article-button {
+    background:
+        radial-gradient(
+            circle at 50% 30vh,
+            rgba(255, 220, 140, 0.85) 0%,
+            rgba(255, 220, 140, 0) 30%
+        ),
+        radial-gradient(
+            circle at 50% 30vh,
+            rgb(255, 150, 123) 0vh,
+            rgb(92, 22, 99) 90vh,
+            rgb(223, 58, 147) 100vh,
+            rgba(32, 31, 66, 0) 120vh
+        ) !important;
+}
+
+.navbar-buttons a {
+    height: 100%;
+}
+
 .navbar-buttons {
     display: flex;
     gap: 2rem;

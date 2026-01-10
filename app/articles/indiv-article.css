@@ -2,6 +2,26 @@
     color: white;
     width: 100%;
 }
+
+.overlay-btn-close {
+    position: absolute;
+    text-decoration: none;
+    left: 3%;
+    top: 3%;
+    color: white;
+    background: transparent;
+    transform: translate(-50%, -50%);
+    border: solid 0px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    padding: 0px 20px 0px 20px;
+    transition: 0.5s;
+}
+
+.overlay-btn-close:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
 .indiv-article h1 {
     font-size: 3rem;
     text-align: center;
@@ -82,6 +102,7 @@ td {
 @media (max-width: 768px) {
     .indiv-article h1 {
         font-size: 2rem;
+        margin-top: 5%;
     }
 
     .article-body {
@@ -124,5 +145,12 @@ td {
     .article-table-block th,
     td {
         font-size: 0.7rem;
+    }
+
+    .overlay-btn-close {
+        top: 3%;
+        left: 7%;
+        font-size: 1rem;
+        padding: 0 5px 0 5px;
     }
 }
