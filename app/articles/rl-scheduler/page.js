@@ -29,7 +29,7 @@ export default function RlScheduler() {
                         beyond this limitation by enabling the scheduler to
                         learn from runtime behavior.
                     </p>
-                    <h2>What exactly is a scheduler tho?</h2>
+                    <h2>What exactly is a scheduler?</h2>
                     <p>
                         A process scheduler in an operating system decides which
                         process to run next. Yet my computer appears to run
@@ -479,9 +479,77 @@ export default function RlScheduler() {
                         </Prism>
                     </div>
                     <p>
-                        With all these functions integrated, we can have our
-                        scheduler up and running by returning the output to
-                        update slice.
+                        Each forward pass of the policy network takes
+                        approximately 15 µs. If an RL decision were made every
+                        time a task was enqueued, this overhead would accumulate
+                        quickly and significantly impact scheduling latency. To
+                        mitigate this cost, I chose to evaluate the policy for
+                        each task at most once every 1 ms. As a result, a task
+                        retains the same time slice for the duration of this 1
+                        ms window, regardless of how many times it is enqueued,
+                        and is assigned a new slice only when the interval
+                        expires.
+                    </p>
+                    <h2>Results</h2>
+                    <p>
+                        After successfully integrating the policy into the Linux
+                        kernel and resolving numerous implementation issues, I
+                        was able to run the adaptive scheduler stably in kernel
+                        space. I then evaluated the adaptive scheduler alongside
+                        the stock CFS scheduler using identical workloads. The
+                        following table summarizes the observed results.
+                    </p>
+                    <div className="article-table-block">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Scheduler Type</th>
+                                    <th>Average Burst Time</th>
+                                    <th>Average Wait time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Stock CFS</td>
+                                    <td>0.385 ms</td>
+                                    <td>11.06 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>RL Scheduler</td>
+                                    <td>0.419 ms</td>
+                                    <td>13.43 ms</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        While the adaptive scheduler exhibits a slightly higher
+                        average wait time compared to stock CFS, this behavior
+                        is consistent with the reward formulation used during
+                        training. The reward function explicitly balances wait
+                        time reduction against longer burst execution and fewer
+                        context switches, prioritizing overall scheduling
+                        efficiency rather than minimizing wait time alone. As a
+                        result, the adaptive scheduler accepts a modest increase
+                        in wait time in exchange for improved burst behavior and
+                        reduced context-switch overhead.
+                    </p>
+                    <h2>Conclusion</h2>
+                    <p>
+                        Although the adaptive scheduler produced encouraging
+                        results, there remains significant potential for further
+                        optimization. In particular, training the policy
+                        directly within the kernel, rather than relying on an
+                        external simulator, could allow the agent to better
+                        capture real-world scheduling dynamics and hardware
+                        effects. Overall, this project deepened my understanding
+                        of how learning-based algorithms can be integrated into
+                        low-level systems such as the Linux kernel. Looking
+                        ahead, similar techniques could be extended to implement
+                        more aggressive scheduling policies, such as shortest
+                        job first (SJF) by appropriately redefining the reward
+                        function and adjusting the policy architecture to suit
+                        specific use cases.
                     </p>
                 </div>
             </div>

@@ -46,3 +46,23 @@
     font-size: 1rem;
     line-height: 1.4;
 }
+
+.article-table-block {
+    width: 100%;
+    margin: 2% 0 2% 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.article-table-block table,
+th,
+td {
+    border: 1px solid white;
+    border-collapse: collapse;
+}
+
+.article-table-block th,
+td {
+    padding: 20px;
+}
