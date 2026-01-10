@@ -16,10 +16,16 @@
     font-size: 2rem;
 }
 
+.navbar > a {
+    display: block;
+    text-decoration: none;
+}
+
 .navbar-title {
     font-size: 2rem;
     font-weight: 600;
     margin-left: 5%;
+    white-space: nowrap;
 
     background:
         radial-gradient(
@@ -58,6 +64,7 @@
 
 .navbar-buttons a {
     height: 100%;
+    text-decoration: none;
 }
 
 .navbar-buttons {
@@ -75,6 +82,9 @@
     min-height: 30px;
     height: 100%;
     width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     font-size: 1.2rem;
 
@@ -155,9 +165,11 @@
     }
 
     .navbar-buttons button {
-        width: 100%;
+        width: 80%;
         height: auto;
+        padding: 20px 0 20px 0;
         font-size: 1.2rem;
+        margin-left: 10%;
     }
 
     .navbar-title {
