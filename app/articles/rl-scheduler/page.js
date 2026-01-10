@@ -146,7 +146,7 @@ export default function RlScheduler() {
                         virtual deadline is computed as follows:
                     </p>
 
-                    <div>
+                    <div className="math-block">
                         {
                             "$$\\text{deadline} = \\text{vruntime} + \\text{slice} \\cdot \\frac{\\text{NICE\_0\_WEIGHT}}{\\text{task\_weight}}$$"
                         }
@@ -198,7 +198,7 @@ export default function RlScheduler() {
                         virtual deadline?
                     </p>
 
-                    <div>
+                    <div className="math-block">
                         {
                             "$$\\text{deadline} = \\text{vruntime} + \\text{slice} \\cdot \\frac{\\text{NICE\_0\_WEIGHT}}{\\text{task\_weight}}$$"
                         }
@@ -283,13 +283,7 @@ export default function RlScheduler() {
                         context-switch overhead and average wait time while
                         maximizing average turnaround time across the runqueue.
                     </p>
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                    >
+                    <div className="math-block math-block--row">
                         {`
                             $$
                             s_t =
@@ -311,7 +305,7 @@ export default function RlScheduler() {
                             $$
                         `}
                     </div>
-                    <div>
+                    <div className="math-block">
                         {`
                             $$
                             R_t =
