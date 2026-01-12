@@ -548,6 +548,29 @@ export default function RlScheduler() {
                         function and adjusting the policy architecture to suit
                         specific use cases.
                     </p>
+                    <h2>Links to Repos</h2>
+                    <ul className="repo-links">
+                        <li>
+                            <a
+                                href="https://github.com/vrushang1234/arch-kernel"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img src="/assets/Pictures/Articles/github-svg.svg" />
+                                <span>Arch Kernel</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://github.com/vrushang1234/nice-rl-agent"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img src="/assets/Pictures/Articles/github-svg.svg" />
+                                Python Simulator
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </MathJaxProvider>

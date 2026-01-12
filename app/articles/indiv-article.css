@@ -103,6 +103,36 @@ td {
     gap: 2rem;
 }
 
+.repo-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.repo-links li {
+    margin-top: 0.8rem;
+}
+
+.repo-links a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    color: white;
+    font-size: 1.2rem;
+
+    transition: opacity 0.2s ease;
+    text-decoration: underline;
+}
+
+.repo-links a > img {
+    height: 1.2rem;
+}
+
+.repo-links a:hover {
+    color: #3772de;
+}
+
 @media (max-width: 768px) {
     .indiv-article h1 {
         font-size: 2rem;
