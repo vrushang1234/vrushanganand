@@ -548,7 +548,7 @@ export default function RlScheduler() {
                         function and adjusting the policy architecture to suit
                         specific use cases.
                     </p>
-                    <h2>Links to Repos</h2>
+                    <h2>Links to Github Repositories</h2>
                     <ul className="repo-links">
                         <li>
                             <a
