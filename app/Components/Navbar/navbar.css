@@ -46,6 +46,10 @@
     -webkit-text-fill-color: transparent;
 }
 
+.navbar-title > a {
+    text-decoration: none;
+}
+
 .navbar-article-button {
     background:
         radial-gradient(
