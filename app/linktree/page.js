@@ -50,7 +50,7 @@ export default function Linktree() {
                         className="linktree-link"
                     >
                         <span className="icon-col">
-                            <img src="/favicon.ico" alt="" />
+                            <img src="/favicon-white.ico" alt="" />
                         </span>
                         <span>Portfolio</span>
                     </a>
