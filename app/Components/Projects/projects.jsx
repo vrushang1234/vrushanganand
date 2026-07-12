@@ -26,6 +26,22 @@ const projects = [
     },
     {
         id: 2,
+        title: "vishyOS",
+        description: "A custom x86 64 bit Operating System written in Rust.",
+        image: "/assets/Projects/terminal.jpg",
+        btns: [
+            {
+                icons: [
+                    "/assets/Pictures/github-white.png",
+                    "/assets/Pictures/github-black.png",
+                ],
+                title: "Github Repo",
+                link: "https://github.com/vrushang1234/vishyOS",
+            },
+        ],
+    },
+    {
+        id: 3,
         title: "FPGA Trading Engine",
         description:
             "An FPGA-based HFT system combining hardware order matching with an on-chip TPU implemented in FPGA fabric for low-latency reinforcement learning inference.",
@@ -42,7 +58,7 @@ const projects = [
         ],
     },
     {
-        id: 3,
+        id: 4,
         title: "Hyperloop Controls",
         description: "Rust-powered control systems for UCI HyperXite.",
         image: "/assets/Projects/HX.webp",
@@ -58,7 +74,7 @@ const projects = [
         ],
     },
     {
-        id: 4,
+        id: 5,
         title: "UCI ENGR Room Reservation",
         description: "Room reservation system for UCI Engineering clubs.",
         image: "/assets/Projects/ICS259.png",
