@@ -5,8 +5,13 @@ const nextConfig = {
     async redirects() {
         return [
             {
-                source: '/articles/hft-system',
-                destination: '/assets/EECS_159B_HFT_Report.pdf',
+                source: "/articles/hft-system",
+                destination: "/assets/EECS_159B_HFT_Report.pdf",
+                permanent: false,
+            },
+            {
+                source: "/articles/tisa",
+                destination: "/assets/TISA.pdf",
                 permanent: false,
             },
         ];
