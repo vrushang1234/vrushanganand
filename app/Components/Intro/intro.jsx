@@ -2,6 +2,8 @@
 import "./intro.css";
 import { useRef } from "react";
 
+import ParticleField from "./particleField";
+
 import { useScrollGradient } from "../../useScrollGradient";
 
 import gradientStyle from "../../gradientStyle";
@@ -21,6 +23,7 @@ export default function Intro() {
 
     return (
         <div className="intro-container" id="intro" ref={introRef}>
+            <ParticleField />
             <h3
                 className="intro"
                 style={gradientStyle(gradientOffset, opacity, scale)}
