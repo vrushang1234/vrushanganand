@@ -66,9 +66,85 @@
     margin-top: 2%;
 }
 
-.articles-list > h1 {
-    font-size: 2.5rem;
+.writing-section + .writing-section {
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.writing-section > h1 {
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
     margin-top: 20px;
+    letter-spacing: 0.02em;
+}
+
+.writing-section + .writing-section > h1 {
+    margin-top: 0;
+}
+
+.article-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 20px;
+    font-size: clamp(0.75rem, 2.6vw, 0.9rem);
+}
+
+.article-filter {
+    appearance: none;
+    background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='white' stroke-width='1.5'/></svg>")
+            no-repeat right 0.8rem center / 0.7rem,
+        transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    padding: 0.35rem 2.2rem 0.35rem 0.9rem;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    transition:
+        border-color 0.3s,
+        color 0.3s;
+}
+
+.article-filter:hover,
+.article-filter:focus {
+    outline: none;
+    color: black;
+    background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='black' stroke-width='1.5'/></svg>")
+            no-repeat right 0.8rem center / 0.7rem,
+        radial-gradient(
+            circle at 50% 30vh,
+            rgba(255, 220, 140, 0.85) 0%,
+            rgba(255, 220, 140, 0) 30%
+        ),
+        radial-gradient(
+            circle at 50% 30vh,
+            rgb(255, 150, 123) 0vh,
+            rgb(92, 22, 99) 90vh,
+            rgb(223, 58, 147) 100vh,
+            rgba(32, 31, 66, 0) 120vh
+        ) !important;
+}
+
+.article-filter option {
+    background-color: #111;
+    color: white;
+}
+
+.article-pdf-tag {
+    display: inline-block;
+    margin-left: 0.6rem;
+    padding: 0.1rem 0.45rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 4px;
+    font-size: clamp(0.6rem, 2vw, 0.7rem);
+    letter-spacing: 0.05em;
+    vertical-align: middle;
+    text-decoration: none;
 }
 
 .article-link {
@@ -84,14 +160,15 @@
 
 .articles-list h2 {
     margin-top: 2%;
-    font-size: 1.4rem;
+    font-size: clamp(1.05rem, 3.2vw, 1.4rem);
     text-decoration: underline;
     text-underline-offset: 7px;
 }
 
 .articles-list p {
     margin-top: 15px;
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 2.6vw, 1rem);
+    line-height: 1.5;
 }
 
 @media (max-width: 768px) {
@@ -119,21 +196,27 @@
     }
 
     .articles-list {
-        width: 100%;
+        width: 90%;
         margin-top: 10%;
         margin-left: 5%;
     }
 
-    .articles-list h1 {
-        font-size: 1.5rem;
+    .article-filters {
+        margin-top: 10px;
+        gap: 0.4rem;
+        padding-right: 5%;
+    }
+
+    .article-filter {
+        padding: 0.25rem 2rem 0.25rem 0.7rem;
     }
 
     .articles-list h2 {
-        font-size: 1rem;
         margin-top: 5%;
     }
 
-    .articles-list p {
-        font-size: 1rem;
+    .writing-section + .writing-section {
+        margin-top: 2.2rem;
+        padding-top: 1.6rem;
     }
 }

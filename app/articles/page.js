@@ -1,4 +1,5 @@
 import Navbar from "./navbar";
+import WritingList from "./writing-list";
 import "./articles.css";
 
 export default function Articles() {
@@ -80,32 +81,7 @@ export default function Articles() {
                         </div>
                     </div>
                 </div>
-                <div className="articles-list">
-                    <h1>Articles</h1>
-                    <div className="article-list-element">
-                        <a
-                            className="article-link"
-                            href="articles/adaptive-scheduler"
-                        >
-                            <h2>Adaptive Kernel Scheduler</h2>
-                            <p>
-                                A custom reinforcement learning powered process
-                                scheduler integrated into the Arch Linux kernel
-                                for adaptive, low-latency task scheduling.
-                            </p>
-                        </a>
-                    </div>
-                    <div className="article-list-element">
-                        <a className="article-link" href="articles/mmu">
-                            <h2>vishyOS - Memory Management</h2>
-                            <p>
-                                From physical frames to virtual pages:
-                                transforming raw RAM into isolated address
-                                spaces.
-                            </p>
-                        </a>
-                    </div>
-                </div>
+                <WritingList />
             </div>
         </>
     );
